@@ -18,8 +18,8 @@ if isfield(T.representer, 'BoundingBox')
 end
 
 % And the current prediction in green
-if isfield(T.tracker, 'm_k1k1');
-  rectangle('Position', T.tracker.m_k1k1, 'EdgeColor', 'g');
+if isfield(T.tracker, 'BBm_k1k1');
+  rectangle('Position', T.tracker.BBm_k1k1, 'EdgeColor', 'g');
 end
 drawnow;
 
