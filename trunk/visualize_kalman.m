@@ -10,7 +10,8 @@ if ~isfield(T.visualizer, 'init');
 end
 
 % Display the current frame.
-image(frame);
+subplot(1,2,1);imshow(T.segmenter.segmented,[]);
+subplot(1,2,2);image(frame);
 
 % Draw the current measurement in red.
 if isfield(T.representer, 'BoundingBox')
