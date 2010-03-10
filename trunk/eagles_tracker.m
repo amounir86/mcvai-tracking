@@ -16,7 +16,7 @@ Segmenter.segment = @background_subtractor;
 Recognizer.recognize = @find_blob;
 
 %% Represnter
-Representer.represent = @filter_blobs;
+Representer.represent = @filter_blobs2;
 
 %% Tracker
 

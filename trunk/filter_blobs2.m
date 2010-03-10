@@ -8,9 +8,9 @@ if sum(sum(T.recognizer.blobs))
         [I, IX] = max([R.Area]);
         T.representer.BoundingBox = R(IX(size(IX,2))).BoundingBox;
         T.representer.Centroid = R(IX(size(IX,2))).Centroid;
-        velocitat = [T.representer.Centroid(1)-T.representer.previous(1) T.representer.Centroid(2)-T.representer.previous(2)];
-        T.representer.XK = [T.representer.Centroid velocitat];
-        T.representer.previous = T.representer.XK;
+        velocity = [T.representer.Centroid(1)-T.representer.previous(1) T.representer.Centroid(2)-T.representer.previous(2)];
+        T.representer.Velocity = [T.representer.Centroid velocity];
+        T.representer.previous = T.representer.Velocity;
         figure(3),
         subplot(2,2,1),subimage(T.segmenter.segmented);
         subplot(2,2,3),subimage(T.segmenter.background);
@@ -25,8 +25,8 @@ if sum(sum(T.recognizer.blobs))
         [I, IX] = max([R.Area]);
         T.representer.BoundingBox = R(IX(size(IX,2))).BoundingBox;
         T.representer.Centroid = R(IX(size(IX,2))).Centroid;
-        T.representer.XK = [T.representer.Centroid 0 0];
-        T.representer.previous = T.representer.XK;
+        T.representer.Velocity = [T.representer.Centroid 0 0];
+        T.representer.previous = T.representer.Velocity;
         figure(3),
         subplot(2,2,1),subimage(T.segmenter.segmented);   
         subplot(2,2,3),subimage(T.segmenter.background);
