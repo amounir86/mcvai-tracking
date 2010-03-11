@@ -2,7 +2,7 @@ function T = visualize_kalman(T, frame)
 
 % Initialize the figure and setup pause callback.
 if ~isfield(T.visualizer, 'init');
-  figure;
+  figure(1),
   h = gcf;
   set(h, 'KeyPressFcn', {@pauseHandler, h});
   setappdata(h, 'paused', false);
@@ -10,9 +10,13 @@ if ~isfield(T.visualizer, 'init');
 end
 
 % Display the current frame.
-subplot(2,2,1); image(frame);
-subplot(2,2,2); imshow(T.segmenter.segmented,[]);
-subplot(2,2,3); imshow(T.segmenter.background,[]);
+subplot(2,3,1); image(frame);
+subplot(2,3,2); imshow(T.segmenter.segmented,[]);
+subplot(2,3,3); imshow(T.segmenter.background,[]);
+if isfield(T.representer,'real_frame_segmented');
+    subplot(2,3,4); imshow(T.representer.real_frame_segmented,[]);
+    subplot(2,3,6); stem(T.representer.histogram); axis([1 768 0 max(T.representer.histogram)]); 
+end
 
 % Draw the current measurement in red.
 if isfield(T.representer, 'BoundingBox')

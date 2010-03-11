@@ -1,4 +1,4 @@
-function T = eagles_tracker(fname, gamma, tau, radius);
+function T = eagles_tracker(fname, gamma, tau, radius)
 % This tracker is based on Kalman filters.
 % It uses .... for segmentation
 % It uses .... for detection
@@ -16,7 +16,7 @@ Segmenter.segment = @background_subtractor_selectivity;
 Recognizer.recognize = @detect_faces;
 
 %% Represnter
-Representer.represent = @filter_blobs2;
+Representer.represent = @filter_blobs3;
 
 %% Tracker
 
