@@ -10,10 +10,10 @@ function T = eagles_tracker(fname, gamma, tau, radius);
 Segmenter.gamma   = gamma;
 Segmenter.tau     = tau;
 Segmenter.radius  = radius;
-Segmenter.segment = @background_subtractor;
+Segmenter.segment = @background_subtractor_selectivity;
 
 %% Detector
-Recognizer.recognize = @find_blob;
+Recognizer.recognize = @detect_faces;
 
 %% Represnter
 Representer.represent = @filter_blobs2;
