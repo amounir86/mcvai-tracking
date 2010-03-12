@@ -9,6 +9,7 @@ Segmenter.segment = @background_subtractor;
 Recognizer.recognize = @find_blob;
 Representer.represent = @filter_blobs;
 
+
 % The tracker module.
 Tracker.H          = eye(4);        % System model
 Tracker.Q          = 0.5 * eye(4);  % System noise

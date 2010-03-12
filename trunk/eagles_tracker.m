@@ -13,10 +13,12 @@ Segmenter.radius  = radius;
 Segmenter.segment = @background_subtractor_selectivity;
 
 %% Detector
-Recognizer.recognize = @detect_faces;
+%Recognizer.recognize = @detect_faces;
+Recognizer.recognize = @find_blob;
 
 %% Represnter
-Representer.represent = @filter_blobs3;
+Representer.represent = @filter_blobs4;
+Representer.found_blobs = 0;
 
 %% Tracker
 
