@@ -23,12 +23,16 @@ image(frame);
 
 % Draw the current measurement in red.
 if isfield(T.representer, 'BoundingBox')
-  rectangle('Position', T.representer.BoundingBox, 'EdgeColor', 'r');
+    for mBB = 1:size(T.representer.BoundingBox, 1)
+        rectangle('Position', T.representer.BoundingBox(mBB, :), 'EdgeColor', 'r');
+    end
 end
 
 % And the current prediction in green
 if isfield(T.tracker, 'BBm_k1k1');
-  rectangle('Position', T.tracker.BBm_k1k1, 'EdgeColor', 'g');
+    for kBB = 1:size(T.tracker.BBm_k1k1, 2)
+        rectangle('Position', T.tracker.BBm_k1k1(:, kBB)', 'EdgeColor', 'g');
+    end
 end
 drawnow;
 

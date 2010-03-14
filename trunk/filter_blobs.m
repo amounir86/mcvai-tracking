@@ -1,5 +1,9 @@
 function T = filter_blobs(T, frame)
 
+if T.frame_number == 286
+    x = 0;
+end
+
 % Make sure at lease one blob was recognized
 if sum(sum(T.recognizer.blobs))
   % Extract the BoundingBox and Area of all blobs
@@ -7,6 +11,10 @@ if sum(sum(T.recognizer.blobs))
   
   % And only keep the biggest one
   [I, IX] = max([R.Area]);
-  T.representer.BoundingBox = R(IX(size(IX,2))).BoundingBox;
+  for i = 1:length(R)
+    T.representer.BoundingBox(i, :) = R(i).BoundingBox;
+  end
+else
+  T.representer.BoundingBox = [];
 end
 return

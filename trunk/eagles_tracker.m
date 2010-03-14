@@ -14,10 +14,10 @@ Segmenter.segment = @background_subtractor_selectivity;
 
 %% Detector
 %Recognizer.recognize = @detect_faces;
-Recognizer.recognize = @find_blob;
+Recognizer.recognize = @detect_faces;
 
 %% Represnter
-Representer.represent = @filter_blobs4;
+Representer.represent = @filter_blobs;
 Representer.found_blobs = 0;
 
 %% Tracker
@@ -37,7 +37,7 @@ Tracker.VF          = velTMat;        % Measurement model
 Tracker.VR          = 5 * velTMat;    % Measurement noise
 Tracker.Vinnovation = 0;
 
-Tracker.track      = @kalman_step;
+Tracker.track      = @multiple_kalman_step;
 
 %% Visualizer
 % A custom visualizer for the Kalman state.
