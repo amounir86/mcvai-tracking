@@ -31,9 +31,10 @@ T.segmenter.segmented = zeros(size(frame_grey));
 
 if (T.segmenter.backgroundBool == 0)
    [w,h] = size(frame_grey);
+   tau = T.segmenter.tau;
    frame_grey = reshape(frame_grey,[],1);
    Ipro = T.segmenter.background' * (frame_grey-T.segmenter.psi); 
    T.segmenter.reconstruct = T.segmenter.background*Ipro+T.segmenter.psi;
-   T.segmenter.segmented = reshape((abs(frame_grey - T.segmenter.reconstruct)>20),w,h);
+   T.segmenter.segmented = reshape((abs(frame_grey - T.segmenter.reconstruct)>tau),w,h);
 end
 return
