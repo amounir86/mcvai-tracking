@@ -1,4 +1,4 @@
-function T = eagles_tracker(fname, gamma, tau, radius, name1, name2, name3)
+function T = eagles_tracker(fname, gamma, tau, radius, names)
 % This tracker is based on Kalman filters.
 % It uses .... for segmentation
 % It uses .... for detection
@@ -7,31 +7,31 @@ function T = eagles_tracker(fname, gamma, tau, radius, name1, name2, name3)
 
 %% People to track
 
-names_to_track = nargin - 4;
-names = [];
-
-if (names_to_track == 0)
-    names = 1;
-else
-    for i = 1 : names_to_track
-
-        name = eval(['name' num2str(i)]);
-        
-        switch name
-            case 'monica' 
-                names = [names 1];
-            case 'ahmed' 
-                names = [names 2];
-            case 'lluis' 
-                names = [names 3];
-            otherwise
-                names = [1];
-        end
-
-    end
-end
-   
-names = sort(names);
+% names_to_track = nargin - 4;
+% names = [];
+% 
+% if (names_to_track == 0)
+%     names = 1;
+% else
+%     for i = 1 : names_to_track
+% 
+%         name = eval(['name' num2str(i)]);
+%         
+%         switch name
+%             case 'monica' 
+%                 names = [names 1];
+%             case 'ahmed' 
+%                 names = [names 2];
+%             case 'lluis' 
+%                 names = [names 3];
+%             otherwise
+%                 names = [1];
+%         end
+% 
+%     end
+% end
+%    
+% names = sort(names);
 
 %% Segmenter
 % Initialize background model parameters
@@ -45,12 +45,13 @@ Segmenter.color = [];
 Segmenter.reconstruct = [];
 Segmenter.segment = @background_subtractor_eigenbackground;
 
-%% Detector
-%Recognizer.recognize = @detect_faces;
-%Recognizer.recognize = @detect_faces;
+%% Classifiers
+[ eigenfaces, classifiers ] = getClassifiers();
 
-%Recognizer.recognize = @find_blob;
- Recognizer.recognize = @detect_faces;
+%% Detector
+% Recognizer.recognize = @find_blob;
+% Recognizer.recognize = @detect_faces;
+ Recognizer.recognize = @detect_recognize_faces;
 
 
 %% Represnter
@@ -74,7 +75,7 @@ Tracker.VF          = velTMat;        % Measurement model
 Tracker.VR          = 5 * velTMat;    % Measurement noise
 Tracker.Vinnovation = 0;
 
-Tracker.track      = @multiple_kalman_step;
+Tracker.track      = @known_people_tracker;
 
 %% Visualizer
 % A custom visualizer for the Kalman state.
@@ -90,6 +91,8 @@ T.representer = Representer;
 T.tracker     = Tracker;
 T.visualizer  = Visualizer;
 T.names       = names;
+T.eigenfaces  = eigenfaces;
+T.classifiers = classifiers;
 
 %% Execute
 % And run the tracker on the video.
