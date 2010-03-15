@@ -38,11 +38,20 @@ names = sort(names);
 Segmenter.gamma   = gamma;
 Segmenter.tau     = tau;
 Segmenter.radius  = radius;
-Segmenter.segment = @background_subtractor_selectivity;
+%Segmenter.segment = @background_subtractor_selectivity;
+Segmenter.backgroundBool = 1;
+Segmenter.psi = 0;
+Segmenter.color = [];
+Segmenter.reconstruct = [];
+Segmenter.segment = @background_subtractor_eigenbackground;
 
 %% Detector
+%Recognizer.recognize = @detect_faces;
+%Recognizer.recognize = @detect_faces;
+
 %Recognizer.recognize = @find_blob;
  Recognizer.recognize = @detect_faces;
+
 
 %% Represnter
 Representer.represent = @filter_blobs5;
