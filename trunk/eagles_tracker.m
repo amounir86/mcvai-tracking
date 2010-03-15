@@ -78,6 +78,7 @@ Tracker.track      = @multiple_kalman_step;
 
 %% Visualizer
 % A custom visualizer for the Kalman state.
+Visualizer.imageFinal = [];
 Visualizer.visualize = @visualize_kalman;
 Visualizer.paused    = false;
 

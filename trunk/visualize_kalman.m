@@ -10,15 +10,16 @@ if ~isfield(T.visualizer, 'init');
 end
 
 % Display the current frame.
- subplot(2,3,1); image(frame);
- subplot(2,3,4); imshow(T.segmenter.color,[]);
- if length(T.segmenter.reconstruct) ~= 0
-     subplot(2,3,3); imshow(uint8(reshape(T.segmenter.reconstruct,240,320)));
- end
- %subplot(2,3,3); imshow(reshape(T.segmenter.background(:,1),240,320),[]);
- subplot(2,3,2); imshow(T.segmenter.segmented,[]);
- 
 
+%  subplot(2,3,4); imshow(T.segmenter.color,[]);
+%  if length(T.segmenter.reconstruct) ~= 0
+%      subplot(2,3,3); imshow(uint8(reshape(T.segmenter.reconstruct,240,320)));
+%  end
+%  subplot(2,3,2); imshow(T.segmenter.segmented,[]);
+%  %subplot(2,3,3); imshow(reshape(T.segmenter.background(:,1),240,320),[]);
+% subplot(2,3,1); image(frame);
+ 
+image(frame)
  
 %  if isfield(T.representer,'real_frame_segmented');
 %      subplot(2,3,4); imshow(T.representer.real_frame_segmented,[]);
@@ -44,10 +45,15 @@ if isfield(T.tracker, 'BBm_k1k1');
 end
 drawnow;
 
+
 % If we're paused, wait (but draw).
 while (getappdata(gcf, 'paused'))
   drawnow;
 end
+h = getframe;
+
+T.visualizer.imageFinal = h.cdata;
+
 return
 
 % This is a callback function that toggles the pause state.
