@@ -1,0 +1,49 @@
+%\documentclass[12pt,a4paper]{article}
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\author{
+	Llu\'{i}s-Pere de las Heras Caballero \and
+	Ahmed Mounir Gad \and
+	Monica Pi\'{n}ol
+}
+
+
+\title{Face recognition and tracking}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+\section{Introduction}
+
+In this project our main focus is to build a single and multiple target tracker. We extend this approach to build a useful reallife application to that tracker which is a face recognizer and tracker.
+
+Our project first starts the normal tracking process which is segmentation and only determining the useful parts of the scene. We use these useful parts of the scene to detect the faces and correspond these faces to the interesting faces in the scene. We afterwards calculate the velocity of the person having this face and we keep tracking until the person leaves the scene or our tracker fails.
+
+\section{Segmentation}
+
+\section{Detection}
+
+Now the segmenter has finished its work and we have a number of blobs that correspond to the changes in the background. These changes are definitely the objects we are interested in.
+
+We first start by detecting the faces on every blob. We have a Support Vector Machine(SVM) already trained and having the faces we are interested in. We check the detected faces and get the class to which they belong to from the SVM. If they belong to a known person, i.e. a person with interest. The detector will return the whole blob. Depending on the quality of the segmenter, the whole blob is most probably the whole person's body. From this point we should start tracking.
+
+\section{Representation}
+
+\section{Tracking}
+
+We used this paper \cite{Arulampalam01atutorial}. It was very nice.
+
+\section{Conclusion}
+
+\bibliographystyle{plain}
+\bibliography{bibfile}
+
+\end{document}
