@@ -22,9 +22,11 @@ image(frame);
 % end
 
 % Draw the current measurement in red.
-if isfield(T.representer, 'BoundingBox')
-    for mBB = 1:size(T.representer.BoundingBox, 1)
-        rectangle('Position', T.representer.BoundingBox(mBB, :), 'EdgeColor', 'r');
+if isfield(T.representer, 'all')
+    for mBB = 1:size(T.representer.all, 1)
+        if(T.representer.all(mBB).isEmpty == 0)
+            rectangle('Position', T.representer.all(mBB).BoundingBox, 'EdgeColor', 'r');
+        end
     end
 end
 

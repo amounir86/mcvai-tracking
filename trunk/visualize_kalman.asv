@@ -2,7 +2,7 @@ function T = visualize_kalman(T, frame)
 
 % Initialize the figure and setup pause callback.
 if ~isfield(T.visualizer, 'init');
-  figure;
+  figure(1),
   h = gcf;
   set(h, 'KeyPressFcn', {@pauseHandler, h});
   setappdata(h, 'paused', false);
@@ -10,18 +10,23 @@ if ~isfield(T.visualizer, 'init');
 end
 
 % Display the current frame.
-image(frame);
+subplot(2,3,1); image(frame);
+subplot(2,3,2); imshow(T.segmenter.segmented,[]);
+subplot(2,3,3); imshow(T.segmenter.background,[]);
+if isfield(T.representer,'real_frame_segmented');
+    subplot(2,3,4); imshow(T.representer.real_frame_segmented,[]);
+    axis([1 
+    subplot(2,3,6); stem(T.representer.histogram);
+end
 
 % Draw the current measurement in red.
 if isfield(T.representer, 'BoundingBox')
-    plot(3,3,'
-    line([T.representer.XK(1) T.representer.XK(1)+1], [T.representer.XK(2) T.representer.XK(2)+1], 'LineWidth',3);
-    rectangle('Position', T.representer.BoundingBox, 'EdgeColor', 'r');
+  rectangle('Position', T.representer.BoundingBox, 'EdgeColor', 'r');
 end
 
 % And the current prediction in green
-if isfield(T.tracker, 'm_k1k1');
-  rectangle('Position', T.tracker.m_k1k1, 'EdgeColor', 'g');
+if isfield(T.tracker, 'BBm_k1k1');
+  rectangle('Position', T.tracker.BBm_k1k1, 'EdgeColor', 'g');
 end
 drawnow;
 

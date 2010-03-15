@@ -10,10 +10,12 @@ local_dist = [];
 
 for j = 1 : size(esp,1)
     for i = 1 : size(new,1)
-    
-    local_dist = [local_dist, abs(norm(esp(j)-new(i)))];
-    
-    end
+        if(esp ~= NaN)
+            local_dist = [local_dist, abs(norm(esp(j)-new(i)))];
+        else
+            local_dist = [local_dist, NaN];
+        end
+     end
     distances = [distances; local_dist];
     local_dist = [];
 end
