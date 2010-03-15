@@ -1,9 +1,37 @@
-function T = eagles_tracker(fname, gamma, tau, radius)
+function T = eagles_tracker(fname, gamma, tau, radius, name1, name2, name3)
 % This tracker is based on Kalman filters.
 % It uses .... for segmentation
 % It uses .... for detection
 % It uses .... for representation
 % Finally, the Kalman filter tracks position, size and velocity
+
+%% People to track
+
+names_to_track = nargin - 4;
+names = [];
+
+if (names_to_track == 0)
+    names = 1;
+else
+    for i = 1 : names_to_track
+
+        name = eval(['name' num2str(i)]);
+        
+        switch name
+            case 'monica' 
+                names = [names 1];
+            case 'ahmed' 
+                names = [names 2];
+            case 'lluis' 
+                names = [names 3];
+            otherwise
+                names = [1];
+        end
+
+    end
+end
+   
+names = sort(names);
 
 %% Segmenter
 % Initialize background model parameters
@@ -13,8 +41,8 @@ Segmenter.radius  = radius;
 Segmenter.segment = @background_subtractor_selectivity;
 
 %% Detector
-Recognizer.recognize = @find_blob;
-% Recognizer.recognize = @detect_faces;
+%Recognizer.recognize = @find_blob;
+ Recognizer.recognize = @detect_faces;
 
 %% Represnter
 Representer.represent = @filter_blobs5;
@@ -51,6 +79,7 @@ T.recognizer  = Recognizer;
 T.representer = Representer;
 T.tracker     = Tracker;
 T.visualizer  = Visualizer;
+T.names       = names;
 
 %% Execute
 % And run the tracker on the video.
