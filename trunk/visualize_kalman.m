@@ -10,6 +10,23 @@ if ~isfield(T.visualizer, 'init');
 end
 
 % Display the current frame.
+ subplot(2,3,1); image(frame);
+ subplot(2,3,4); imshow(T.segmenter.color,[]);
+ if length(T.segmenter.reconstruct) ~= 0
+     subplot(2,3,3); imshow(uint8(reshape(T.segmenter.reconstruct,240,320)));
+ end
+ %subplot(2,3,3); imshow(reshape(T.segmenter.background(:,1),240,320),[]);
+ subplot(2,3,2); imshow(T.segmenter.segmented,[]);
+ 
+image(frame);
+%  subplot(2,3,1); image(frame);
+%  subplot(2,3,4); imshow(T.segmenter.color,[]);
+%  if length(T.segmenter.reconstruct) ~= 0
+%      subplot(2,3,3); imshow(uint8(reshape(T.segmenter.reconstruct,240,320)));
+%  end
+%  %subplot(2,3,3); imshow(reshape(T.segmenter.background(:,1),240,320),[]);
+%  subplot(2,3,2); imshow(T.segmenter.segmented,[]);
+ 
 
 %  subplot(2,3,4); imshow(T.segmenter.color,[]);
 %  if length(T.segmenter.reconstruct) ~= 0

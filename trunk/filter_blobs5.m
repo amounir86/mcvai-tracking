@@ -1,4 +1,4 @@
-function T = filter_blobs2(T, frame)
+function T = filter_blobs5(T, frame)
 
 % This function takes all the blobs detected from the detection step for
 % tracking.
@@ -65,6 +65,8 @@ if sum(sum(T.recognizer.blobs))
         T.representer.all = all_representer;
         T.representer
             
+        return
+    
     else
     %% If there is not blob previous    
         
@@ -76,7 +78,8 @@ if sum(sum(T.recognizer.blobs))
             T.representer.all(i).Velocity = [T.representer.all(i).Centroid 0 0];
 
         end
-
+        
+        return
 
     end
 end
