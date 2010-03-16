@@ -1,0 +1,35 @@
+\section{Segmentation}
+The process of segmentation is to separate the background to foreground.
+
+\begin{itemize}
+\item The Background subtraction use three parameters: \textbf{gamma},\textbf{tau} and \textbf{radius}.
+	$ Background_{i+1} = gamma*frame_{i} + (1-gamma)*Background_{i}$
+	\begin{itemize}
+	\item Gamma is the learning rate, usually is 0,05.
+	\item Tau is the different between frame to background.
+	\item Radius is the parameter to delete the little blobs.
+	\end{itemize}
+	
+\item The \textit{background subtraction} is not robustness to change illumination, for this we implement \textit{Grey-World} because is invariant to illuminant changes. 
+The Grey-World method try to eliminate the gray in the image, for this reason move the minimum and the maximum values.
+
+\begin{equation}
+	( R' G' B' )= \left(
+	\begin{array}{ccc}
+		\frac{R_{grey}}{R_{m}(I)}  0  0 \\
+		0  \frac{G_{grey}}{G_{m}(I)}  0 \\
+ 		0  0  \frac{B_{grey}}{B_{m}(I)}
+	\end{array}
+	\right) 
+	* 
+	\left(
+	\begin{array}{c} R \\ G \\ B
+	\end{array}
+	\right)
+\end{equation} 
+
+\item Selectivity is the other method that use the simple different between foreground with background but the selectivity a prior knows that pixel is or isn't foreground. 
+
+\item Eigenbackground
+\end{itemize}
+ 

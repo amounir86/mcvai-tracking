@@ -1,0 +1,9 @@
+\section{Detection}
+
+Now the segmenter has finished its work and we have a number of blobs that correspond to the changes in the background. Some of these changes are definitely the objects we are interested in. This step in the tracker mainly focuses on detecting the important parts of these background changes.
+
+The basic detector provided in our framework is based on simple blob detection. It just returns each set of connected blobs as an object. We basically have two questions to investigate about. The first is how the basic tracker provided behave in the presence of noisy detection. The second is how the tracker behaves in the case of no detection. The answers to these two questions are illustrated in the tracking section.
+
+We did several optimizations to the simple detector provided. The first was to detect faces and keep tracking those detected faces. We thought of an interesting application that may use this technique. We added a face recognizer that only detects faces of people of interest to the tracker. We provide a trained Support Vector Machine(SVM) classifier to our tracker. We train it using labeled faces detected from a video for 5 persons. The detector then will only detect the people of interest in any video and the tracker will only track those people.
+
+In case a match was found, the detector will return the whole blob that made that match. Optimally, this blob should be the whole body of the person. Based on the information from the segmenter, the moving object having the detected face should be the whole person. We then start tracking this person even when the detector fails. A part of the method for doing this is discussed in the representation and the rest is in the tracking section.
