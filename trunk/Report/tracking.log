@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.3.15)  15 MAR 2010 23:01
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.3.15)  16 MAR 2010 01:17
 entering extended mode
-**C:/Documents*and*Settings/amounir/Desktop/Report/tracking.tex
-("C:/Documents and Settings/amounir/Desktop/Report/tracking.tex"
+**D:/Workspace/Module3/TrackingPrj/Report/tracking.tex
+(D:/Workspace/Module3/TrackingPrj/Report/tracking.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
 rman, ngerman, german-x-2009-06-19, ngerman-x-2009-06-19, french, loaded.
@@ -99,6 +99,12 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\tools\verbatim.sty"
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks24
+\verbatim@line=\toks25
+\verbatim@in@stream=\read1
+)
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\amsfonts.sty"
 Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 \symAMSa=\mathgroup4
@@ -109,52 +115,51 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\amssymb.sty"
 Package: amssymb 2009/06/22 v3.00
 )
-("C:\Documents and Settings\amounir\Desktop\Report\tracking.aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+(D:\Workspace\Module3\TrackingPrj\Report\tracking.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\unicode\ucsencs.def"
 File: ucsencs.def 2003/11/29 Fixes to fontencodings LGR, T3
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 20.
+LaTeX Font Info:    Try loading font information for U+msa on input line 21.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 20.
+LaTeX Font Info:    Try loading font information for U+msb on input line 21.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [1
 
 {C:/Documents and Settings/All Users/Application Data/MiKTeX/2.8/pdftex/config/
-pdftex.map}] ("C:\Documents and Settings\amounir\Desktop\Report\tracking.bbl" [
-2]) [3]
-("C:\Documents and Settings\amounir\Desktop\Report\tracking.aux") ) 
+pdftex.map}] [2] (D:\Workspace\Module3\TrackingPrj\Report\tracking.bbl) [3]
+(D:\Workspace\Module3\TrackingPrj\Report\tracking.aux) ) 
 Here is how much of TeX's memory you used:
- 1369 strings out of 495285
- 17903 string characters out of 3179818
- 74576 words of memory out of 3000000
- 4594 multiletter control sequences out of 15000+200000
+ 1397 strings out of 495285
+ 18357 string characters out of 3179818
+ 75207 words of memory out of 3000000
+ 4619 multiletter control sequences out of 15000+200000
  7789 words of font info for 30 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 27i,7n,22p,544b,207s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program 
-Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
-les (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files
- (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files (x
-86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on tracking.pdf (3 pages, 56586 bytes).
+ 27i,7n,22p,608b,199s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)
+/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files (x86)/M
+iKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MiKT
+eX 2.8/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files (x86)/MiKTeX 
+2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on tracking.pdf (3 pages, 57990 bytes).
 PDF statistics:
  28 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

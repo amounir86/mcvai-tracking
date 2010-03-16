@@ -3,6 +3,7 @@
 \usepackage[utf8x]{inputenc}
 \usepackage{ucs}
 \usepackage{amsmath}
+\usepackage{verbatim} 
 \usepackage{amsfonts}
 \usepackage{amssymb}
 
@@ -31,15 +32,27 @@ Our project first starts the normal tracking process which is segmentation and o
 
 \section{Detection}
 
-Now the segmenter has finished its work and we have a number of blobs that correspond to the changes in the background. These changes are definitely the objects we are interested in.
+Now the segmenter has finished its work and we have a number of blobs that correspond to the changes in the background. Some of these changes are definitely the objects we are interested in. This step in the tracker mainly focuses on detecting the important parts of these background changes.
 
-We first start by detecting the faces on every blob. We have a Support Vector Machine(SVM) already trained and having the faces we are interested in. We check the detected faces and get the class to which they belong to from the SVM. If they belong to a known person, i.e. a person with interest. The detector will return the whole blob. Depending on the quality of the segmenter, the whole blob is most probably the whole person's body. From this point we should start tracking.
+The basic detector provided in our framework is based on simple blob detection. It just returns each set of connected blobs as an object. We basically have two questions to investigate about. The first is how the basic tracker provided behave in the presence of noisy detection. The second is how the tracker behaves in the case of no detection. The answers to these two questions are illustrated in the tracking section.
+
+We did several optimizations to the simple detector provided. The first was to detect faces and keep tracking those detected faces. We thought of an interesting application that may use this technique. We added a face recognizer that only detects faces of people of interest to the tracker. We provide a trained Support Vector Machine(SVM) classifier to our tracker. We train it using labeled faces detected from a video for 5 persons. The detector then will only detect the people of interest in any video and the tracker will only track those people.
+
+In case a match was found, the detector will return the whole blob that made that match. Optimally, this blob should be the whole body of the person. Based on the information from the segmenter, the moving object having the detected face should be the whole person. We then start tracking this person even when the detector fails. A part of the method for doing this is discussed in the representation and the rest is in the tracking section.
 
 \section{Representation}
 
 \section{Tracking}
 
-We used this paper \cite{Arulampalam01atutorial}. It was very nice.
+In this section we will discuss the main module of the project which is the tracker. A simple Kalman filter tracker has been provided in the tracking framework. It uses results of the representer to track the position and the extent of the object being tracked. The Kalman filter works by estimating an unobservable state which is updated in time with a linear state update and additive Gaussian noise. It uses the technique described in \cite{Arulampalam01atutorial}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                                                                  %%
+%%   Here we should answer the two provided questions.                            %%
+%%   We should also solve the problems proposed in the detection part.     %%
+%%                                                                                                                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \section{Conclusion}
 
