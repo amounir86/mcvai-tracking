@@ -1,4 +1,26 @@
 \section{Introduction}
+\begin{itemize}
+\item Simple Tracker \\ 
+\xymatrix{*+<0.5cm>[F-,]{Segmentation} \ar[r] & *+<0.5cm>[F-,]{Recognition}  \ar[r] &
+*+<0.5cm>[F-,]{Representation}  \ar[r] & *+<0.5cm>[F-,]{Tracking} 
+}
+
+\item Our Tracker\\ 
+\xymatrix{
+*+<0.5cm>[F-,]{Segmentation} \ar[r] \ar[d] & *+<0.5cm>[F-,]{Recognition} \ar[r] \ar[d] &
+*+<0.5cm>[F-,]{Representation}  \ar[r] & *+<0.5cm>[F-,]{Tracking} 
+\\
+*+<0.5cm>[F-,]{Grey-World} \ar[d] & *+<0.5cm>[F-,]{Face Recognition}\\
+*+<0.5cm>[F-,]{Eigenbackground}
+}
+
+%\xymatrix{
+%S \ar[r] \ar[d] & R \ar[r] \ar[d] & R2  \ar[r] & T 
+%\\G \ar[d] & F \\E
+%}
+
+\end{itemize}
+
 In this project our main focus is to build a single and multiple target tracker. We extend this approach to build a useful real-life application to that tracker which is a face recognizer and tracker.
 
 Our project first starts the normal tracking process which is segmentation and only determining the useful parts of the scene. We use these useful parts of the scene to detect the faces and correspond these faces to the interesting faces in the scene. We afterwards calculate the velocity of the person having this face and we keep tracking until the person leaves the scene or our tracker fails.

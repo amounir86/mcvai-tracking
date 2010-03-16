@@ -3,7 +3,7 @@ The process of segmentation is to separate the background to foreground.
 
 \begin{itemize}
 \item The Background subtraction use three parameters: \textbf{gamma},\textbf{tau} and \textbf{radius}.
-	\begin{equation} Background_{i+1} = gamma*frame_{i} + (1-gamma)*Background_{i} \end{equation}
+	\begin{equation} B_{i+1} = \gamma * F_{i} + (1-\gamma)*B_{i} \end{equation}
 	\begin{itemize}
 	\item Gamma is the learning rate, usually is 0,05.
 	\item Tau is the different between frame to background.
@@ -48,9 +48,9 @@ The Grey-World method try to eliminate the grey in the image, for this reason mo
 
 \begin{figure}[h]
   \centering              
-  \subfigure[Frame 300 - Background Subtraction]{\includegraphics[width=0.3\textwidth]{frame300_segmented}}
-  \subfigure[Frame 300 - Selectivity]{\includegraphics[width=0.3\textwidth]{frame300_selectivity}}
-  \subfigure[Frame 300 - Eigenbackground]{\includegraphics[width=0.3\textwidth]{frame300_eigenbackground}}
+  \subfigure[Background Subtraction]{\includegraphics[width=0.3\textwidth]{frame300_segmented}}
+  \subfigure[Selectivity]{\includegraphics[width=0.3\textwidth]{frame300_selectivity}}
+  \subfigure[Eigenbackground]{\includegraphics[width=0.3\textwidth]{frame300_eigenbackground}}
   \subfigure[Frame 300]{\includegraphics[width=0.3\textwidth]{frame300}}  
   \caption{Different segmentation with the same frame }
 \end{figure}
