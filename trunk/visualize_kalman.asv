@@ -9,31 +9,35 @@ if ~isfield(T.visualizer, 'init');
   T.visualizer.init = true;
 end
 
-% Display the current frame.
-subplot(2,3,1); image(frame);
-subplot(2,3,2); imshow(T.segmenter.segmented,[]);
-subplot(2,3,3); imshow(T.segmenter.background,[]);
-if isfield(T.representer,'real_frame_segmented');
-    subplot(2,3,4); imshow(T.representer.real_frame_segmented,[]);
-    axis([1 
-    subplot(2,3,6); stem(T.representer.histogram);
-end
+image(frame)
 
 % Draw the current measurement in red.
-if isfield(T.representer, 'BoundingBox')
-  rectangle('Position', T.representer.BoundingBox, 'EdgeColor', 'r');
+if isfield(T.representer, 'all')
+    for mBB = 1:size(T.representer.all, 1)
+        rectangle('Position', T.representer.all(mBB).BoundingBox, 'EdgeColor', 'r');
+    end
 end
 
 % And the current prediction in green
-if isfield(T.tracker, 'BBm_k1k1');
-  rectangle('Position', T.tracker.BBm_k1k1, 'EdgeColor', 'g');
+if isfield(T.tracker, 'm_k1k1');
+    for kBB = 1:size(T.tracker, 1)
+            bounding = [T.tracker(kBB).m_k1k1(1) - T.tracker(kBB).m_k1k1(5)/2 ...
+                T.tracker(kBB).m_k1k1(2) - T.tracker(kBB).m_k1k1(6)/2 ...
+                T.tracker(kBB).m_k1k1(5) T.tracker(kBB).m_k1k1(6)];
+            rectangle('Position', bounding, 'EdgeColor', 'r');
+    end
 end
 drawnow;
+
 
 % If we're paused, wait (but draw).
 while (getappdata(gcf, 'paused'))
   drawnow;
 end
+h = getframe;
+
+T.visualizer.imageFinal = h.cdata;
+
 return
 
 % This is a callback function that toggles the pause state.

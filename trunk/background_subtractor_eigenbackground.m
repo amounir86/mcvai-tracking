@@ -1,7 +1,7 @@
 function T = background_subtractor_eigenbackground(T, frame)
 
 T.segmenter.color = greyWorld(frame);
-N = (T.num_frames * 20)/100;
+N = (T.num_frames * 10)/100;
 N = floor(N);
 
 frame_grey = double(rgb2gray(T.segmenter.color));

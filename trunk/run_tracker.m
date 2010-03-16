@@ -3,7 +3,7 @@ function T = run_tracker(fname, T)
 vr = videoReader(fname);
 p = findstr(fname,'.');
 fnameOut = strcat(fname(1:p-1),'Tracker','.avi')
-vw = videoWriter(fnameOut);
+% vw = videoWriter(fnameOut);
 
 T.time         = 0;
 T.frame_number = 0;
@@ -34,11 +34,11 @@ while next(vr)
     T = T.visualizer.visualize(T, frame);
   end
 
-  addframe(vw, T.visualizer.imageFinal );
+%   addframe(vw, T.visualizer.imageFinal );
   pause(0.01);
   T.time = T.time + 1/T.fps;
   
 end
 close(vr);
-close(vw);
+% close(vw);
 return

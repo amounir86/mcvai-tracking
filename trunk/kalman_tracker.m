@@ -7,14 +7,16 @@ Segmenter.segment = @background_subtractor;
 
 % Recognizer and representer is a simple blob finder.
 Recognizer.recognize = @find_blob;
-Representer.represent = @filter_blobs;
-
+Representer.represent = @filter_blobs2;
 
 % The tracker module.
-Tracker.H          = eye(4);        % System model
-Tracker.Q          = 0.5 * eye(4);  % System noise
-Tracker.F          = eye(4);        % Measurement model
-Tracker.R          = 5 * eye(4);  % Measurement noise
+Tracker.H          = eye(6);        % System model
+Tracker.Q          = 0.1 * eye(6);  % System noise
+traker_state       = eye(6);        % Measurement model
+traker_state(1,3)  = 1;
+traker_state(2,4)  = 1;
+Tracker.F          = traker_state;
+Tracker.R          = 5 * eye(6);  % Measurement noise
 Tracker.innovation = 0;
 Tracker.track      = @kalman_step;
 

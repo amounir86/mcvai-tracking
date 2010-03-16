@@ -52,30 +52,28 @@ Segmenter.segment = @background_subtractor_eigenbackground;
 % Recognizer.recognize = @find_blob;
 % Recognizer.recognize = @detect_faces;
  Recognizer.recognize = @detect_recognize_faces;
+ T.detectorUK = [];
+ T.detectorK = [];
 
 
 %% Represnter
-Representer.represent = @filter_blobs5;
+Representer.represent = @filter_blobs7;
+Representer.all = [];
 Representer.found_blobs = 0;
 
 %% Tracker
 
-% Boundingbox tracker parameters
-Tracker.BBH          = eye(4);        % System model
-Tracker.BBQ          = 5 * eye(4);  % System noise
-Tracker.BBF          = eye(4);        % Measurement model
-Tracker.BBR          = 5 * eye(4);    % Measurement noise
-Tracker.BBinnovation = 0;
+% The tracker module.
+Tracker.H          = eye(6);        % System model
+Tracker.Q          = 0.1 * eye(6);  % System noise
+traker_state       = eye(6);        % Measurement model
+traker_state(1,3)  = 1;
+traker_state(2,4)  = 1;
+Tracker.F          = traker_state;
+Tracker.R          = 5 * eye(6);  % Measurement noise
+Tracker.innovation = 0;
+Tracker.track      = @multiple_kalman_step2;
 
-% Velocity tracker parameters
-velTMat = [1 0 1 0; 0 1 0 1; 0 0 1 0; 0 0 0 1];
-Tracker.VH          = velTMat;        % System model
-Tracker.VQ          = 0.5 * velTMat;  % System noise
-Tracker.VF          = velTMat;        % Measurement model
-Tracker.VR          = 5 * velTMat;    % Measurement noise
-Tracker.Vinnovation = 0;
-
-Tracker.track      = @known_people_tracker;
 
 %% Visualizer
 % A custom visualizer for the Kalman state.

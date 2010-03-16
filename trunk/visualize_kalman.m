@@ -9,55 +9,22 @@ if ~isfield(T.visualizer, 'init');
   T.visualizer.init = true;
 end
 
-% Display the current frame.
- subplot(2,3,1); image(frame);
- subplot(2,3,4); imshow(T.segmenter.color,[]);
- if length(T.segmenter.reconstruct) ~= 0
-     subplot(2,3,3); imshow(uint8(reshape(T.segmenter.reconstruct,240,320)));
- end
- %subplot(2,3,3); imshow(reshape(T.segmenter.background(:,1),240,320),[]);
- subplot(2,3,2); imshow(T.segmenter.segmented,[]);
- 
-image(frame);
-%  subplot(2,3,1); image(frame);
-%  subplot(2,3,4); imshow(T.segmenter.color,[]);
-%  if length(T.segmenter.reconstruct) ~= 0
-%      subplot(2,3,3); imshow(uint8(reshape(T.segmenter.reconstruct,240,320)));
-%  end
-%  %subplot(2,3,3); imshow(reshape(T.segmenter.background(:,1),240,320),[]);
-%  subplot(2,3,2); imshow(T.segmenter.segmented,[]);
- 
-
-%  subplot(2,3,4); imshow(T.segmenter.color,[]);
-%  if length(T.segmenter.reconstruct) ~= 0
-%      subplot(2,3,3); imshow(uint8(reshape(T.segmenter.reconstruct,240,320)));
-%  end
-%  subplot(2,3,2); imshow(T.segmenter.segmented,[]);
-%  %subplot(2,3,3); imshow(reshape(T.segmenter.background(:,1),240,320),[]);
-% subplot(2,3,1); image(frame);
- 
 image(frame)
- 
-%  if isfield(T.representer,'real_frame_segmented');
-%      subplot(2,3,4); imshow(T.representer.real_frame_segmented,[]);
-%      rectangle('Position', T.representer.BoundingBox, 'EdgeColor', 'r');
-%      subplot(2,3,5); image(frame);
-%      subplot(2,3,6); stem(T.representer.histogram); axis([1 768 0 max(T.representer.histogram)]); 
-%  end
 
 % Draw the current measurement in red.
 if isfield(T.representer, 'all')
     for mBB = 1:size(T.representer.all, 1)
-        if(T.representer.all(mBB).isEmpty == 0)
-            rectangle('Position', T.representer.all(mBB).BoundingBox, 'EdgeColor', 'r');
-        end
+        rectangle('Position', T.representer.all(mBB).BoundingBox, 'EdgeColor', 'r');
     end
 end
 
 % And the current prediction in green
-if isfield(T.tracker, 'BBm_k1k1');
-    for kBB = 1:size(T.tracker.BBm_k1k1, 2)
-        rectangle('Position', T.tracker.BBm_k1k1(:, kBB)', 'EdgeColor', 'g');
+if isfield(T.tracker, 'm_k1k1');
+    for kBB = 1:size(T.tracker, 1)
+            bounding = [T.tracker(kBB).m_k1k1(1) - T.tracker(kBB).m_k1k1(5)/2 ...
+                T.tracker(kBB).m_k1k1(2) - T.tracker(kBB).m_k1k1(6)/2 ...
+                T.tracker(kBB).m_k1k1(5) T.tracker(kBB).m_k1k1(6)];
+            rectangle('Position', bounding, 'EdgeColor', 'r');
     end
 end
 drawnow;

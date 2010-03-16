@@ -67,11 +67,15 @@ for tObj = 1:length(T.tracker.trackings)
     end
 end
 
+
+
 %% Add the remaining not added represented information
-for rObj = 1:length(T.representer.all)
-    tracking.BBm_k1k1 = representer.all(rObj).BoundingBox';
-    tracking.BBP_k1k1 = eye(4);
-    tracking.Velocity = T.representer.all(rObj).Velocity;
-    tracking.name = T.representer.all(rObj).name;
-    T.tracker.trackings = [T.tracker.trackings tracking];
+if isfield(T.representer,'all')
+    for rObj = 1:length(T.representer.all)
+        tracking.BBm_k1k1 = representer.all(rObj).BoundingBox';
+        tracking.BBP_k1k1 = eye(4);
+        tracking.Velocity = T.representer.all(rObj).Velocity;
+        tracking.name = T.representer.all(rObj).name;
+        T.tracker.trackings = [T.tracker.trackings tracking];
+    end
 end
