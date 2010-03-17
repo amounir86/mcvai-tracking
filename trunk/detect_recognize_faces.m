@@ -52,13 +52,16 @@ if sum(sum(T.recognizer.blobs))
     
     %% Check that we found any faces. If so, label it
     if (length(faces(:)) == 1) % We didn't find a face
+        
+        if(BB(3) + BB(4) > 200)
+            detector.BoundingBox = BB;
+            detector.Centroid = cen;
+            detector.name = 'unknown';
 
-        detector.BoundingBox = BB;
-        detector.Centroid = cen;
-        detector.name = 'unknown';
-
-        % Unknown detected information
-        T.detectorUK = [T.detectorUK detector];
+            % Unknown detected information
+            T.detectorUK = [T.detectorUK detector];
+            continue;
+        end
         continue;
     end
 
@@ -88,8 +91,10 @@ if sum(sum(T.recognizer.blobs))
       
       % Now as we recognize the face we should label it
       % We label it as the index of this face in the names array
-      detector.BoundingBox = BB;
-      detector.Centroid = cen;
+      faceBB = [BB(1)+faces(fCount, 1) BB(2)+faces(fCount, 2) faces(fCount, 3) faces(fCount, 4)];
+      faceCen = [faceBB(1) - faceBB(3)/2 faceBB(1) - faceBB(3)/2];
+      detector.BoundingBox = faceBB;
+      detector.Centroid = faceCen;
       detector.name = T.names(tInd);
       
       % Known detected information

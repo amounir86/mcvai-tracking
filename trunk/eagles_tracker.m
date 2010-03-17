@@ -65,7 +65,7 @@ Representer.found_blobs = 0;
 
 % The tracker module.
 Tracker.H          = eye(6);        % System model
-Tracker.Q          = 0.1 * eye(6);  % System noise
+Tracker.Q          = 0.5 * eye(6);  % System noise
 traker_state       = eye(6);        % Measurement model
 traker_state(1,3)  = 1;
 traker_state(2,4)  = 1;

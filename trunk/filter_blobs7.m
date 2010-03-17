@@ -32,6 +32,8 @@ if (length(T.detectorK) || length(T.detectorUK))
                representer.Velocity = [representer.Centroid new_velocity ...
                    representer.BoundingBox(3) representer.BoundingBox(4)];
                
+               T.representer.all(nRep) = representer;
+               
                % Delete the recognized blob
 %                T.detectorK(nRec) = [];
 %                nRec = nRec - 1;
@@ -60,7 +62,7 @@ if (length(T.detectorK) || length(T.detectorUK))
                     representer = T.detectorUK(best_blob);
                     representer.name = T.representer.all(nRep).name;
                     new_velocity = T.detectorUK(best_blob).Centroid - T.representer.all(nRep).Centroid;
-                    new_velocity = new_velocity * T.fps;
+%                     new_velocity = new_velocity * T.fps;
                     representer.Velocity = [representer.Centroid new_velocity ...
                         representer.BoundingBox(3) representer.BoundingBox(4)];
                
