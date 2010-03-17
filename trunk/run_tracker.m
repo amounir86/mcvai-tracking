@@ -11,7 +11,15 @@ T.fps          = getfield(get(vr), 'fps');
 T.num_frames   = getfield(get(vr), 'numFrames');
 
 while next(vr)
+
   T.frame_number = T.frame_number + 1;
+  
+  if (T.frame_number < 60)
+%       continue;
+  end
+  
+  fprintf(1, 'Frame %d of %d\n', T.frame_number, T.num_frames);
+
   frame = getframe(vr);
   
   if isfield(T, 'segmenter')

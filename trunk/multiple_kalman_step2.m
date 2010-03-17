@@ -2,24 +2,29 @@ function T = multiple_kalman_step2(T, frame)
 
 
 % Get the current filter state.
-Kalman = T.tracker;
-Kalman2 = [];
+if (~isfield(T.tracker, 'TObjs'))
+    T.tracker.TObjs = [];
+end
 
-for i = 1 : length(Kalman)
+K = T.tracker;
+TObjs = [];
+
+for i = 1 : length(T.representer.all)
+
     
-    K = Kalman(i);
-
     % Don't do anything unless we're initialized.
-    if isfield(K, 'm_k1k1') && isfield(T.representer.all(i), 'Velocity')
+    if length(T.tracker.TObjs) >= i && isfield(T.representer.all(i), 'Velocity')
+        
+      TObj = T.tracker.TObjs(i);
 
       % Get the current measurement out of the representer.
       z_k = T.representer.all(i).Velocity';
 
       % Project the state forward m_{k|k-1}.
-      m_kk1 = K.F * K.m_k1k1;
+      m_kk1 = K.F * TObj.m_k1k1;
 
       % Partial state covariance update.
-      P_kk1 = K.Q + K.F * K.P_k1k1 * K.F';
+      P_kk1 = K.Q + K.F * TObj.P_k1k1 * K.F';
 
       % Innovation is disparity in actual versus predicted measurement.
       innovation = z_k - K.H * m_kk1;
@@ -41,18 +46,17 @@ for i = 1 : length(Kalman)
           * K.innovation;
 
       % And store the current filter state for next iteration.
-      K.m_k1k1 = m_kk;
-      K.P_k1k1 = P_kk;
+      TObj.m_k1k1 = m_kk;
+      TObj.P_k1k1 = P_kk;
     else
       if (length(T.representer.all)>=1);
-        K.m_k1k1 = T.representer.all(i).Velocity';
-        K.P_k1k1 = eye(6);
+        TObj.m_k1k1 = T.representer.all(i).Velocity';
+        TObj.P_k1k1 = eye(6);
       end
     end
 
-    Kalman2 = [Kalman2 K];
+    TObjs = [TObjs TObj];
 end
-% Make sure we stuff the filter state back in.
-T.tracker = Kalman2;
 
+T.tracker.TObjs = TObjs;
 return

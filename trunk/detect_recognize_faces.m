@@ -6,6 +6,10 @@ function T = detect_recognize_faces(T, frame)
 %% Label the blobs
 T = find_blob(T, frame);
 
+%% Reinitialize the state variables
+T.detectorK = [];
+T.detectorUK = [];
+
 %% Make sure at lease one blob was recognized
 if sum(sum(T.recognizer.blobs))
   

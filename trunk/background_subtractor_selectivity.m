@@ -5,7 +5,7 @@ frame_grey = double(rgb2gray(frame));
 
 % Check to see if we're initialized
 if ~isfield(T.segmenter, 'background');
-  T.segmenter.background = frame_grey
+  T.segmenter.background = frame_grey;
 end
 
 % Pull local state out.
@@ -22,5 +22,4 @@ background = gamma * frame_grey + (1 - gamma) * ...
 background(find(T.segmenter.segmented == 1)) = T.segmenter.background(find(T.segmenter.segmented == 1));
 T.segmenter.background = background;
 
-sprintf('frame %d',T.frame_number)
 return

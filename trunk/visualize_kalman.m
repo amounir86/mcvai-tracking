@@ -13,18 +13,18 @@ image(frame)
 
 % Draw the current measurement in red.
 if isfield(T.representer, 'all')
-    for mBB = 1:size(T.representer.all, 1)
+    for mBB = 1:length(T.representer.all)
         rectangle('Position', T.representer.all(mBB).BoundingBox, 'EdgeColor', 'r');
     end
 end
 
 % And the current prediction in green
-if isfield(T.tracker, 'm_k1k1');
-    for kBB = 1:size(T.tracker, 1)
-            bounding = [T.tracker(kBB).m_k1k1(1) - T.tracker(kBB).m_k1k1(5)/2 ...
-                T.tracker(kBB).m_k1k1(2) - T.tracker(kBB).m_k1k1(6)/2 ...
-                T.tracker(kBB).m_k1k1(5) T.tracker(kBB).m_k1k1(6)];
-            rectangle('Position', bounding, 'EdgeColor', 'r');
+if isfield(T.tracker.TObjs, 'm_k1k1');
+    for kBB = 1:length(T.tracker.TObjs)
+            bounding = [T.tracker.TObjs(kBB).m_k1k1(1) - T.tracker.TObjs(kBB).m_k1k1(5)/2 ...
+                T.tracker.TObjs(kBB).m_k1k1(2) - T.tracker.TObjs(kBB).m_k1k1(6)/2 ...
+                T.tracker.TObjs(kBB).m_k1k1(5) T.tracker.TObjs(kBB).m_k1k1(6)];
+            rectangle('Position', bounding, 'EdgeColor', 'g');
     end
 end
 drawnow;
