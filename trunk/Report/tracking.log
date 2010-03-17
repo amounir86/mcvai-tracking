@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.2.3)  16 MAR 2010 17:39
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.3.15)  17 MAR 2010 15:48
 entering extended mode
-**tracking.tex
-("C:\Users\mpinyol\Documents\Master\Module 3\Tracking\Report\tracking.tex"
+**D:/Workspace/Module3/TrackingPrj/Report/tracking.tex
+(D:/Workspace/Module3/TrackingPrj/Report/tracking.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
 rman, ngerman, german-x-2009-06-19, ngerman-x-2009-06-19, french, loaded.
@@ -105,6 +105,22 @@ Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 \verbatim@line=\toks25
 \verbatim@in@stream=\read1
 )
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\fancyvrb\fancyvrb.sty"
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks26
+)
+\FV@CodeLineNo=\count100
+\FV@InFile=\read2
+\FV@TabBox=\box28
+\c@FancyVerbLine=\count101
+\FV@StepNumber=\count102
+\FV@OutFile=\write3
+)
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\amsfonts.sty"
 Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 \symAMSa=\mathgroup4
@@ -118,10 +134,6 @@ Package: amssymb 2009/06/22 v3.00
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphicx.sty"
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\keyval.sty"
-Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks26
-)
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphics.sty"
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
@@ -135,7 +147,7 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\pdftex-def\pdftex.def"
 File: pdftex.def 2009/08/25 v0.04m Graphics/color for pdfTeX
-\Gread@gobject=\count100
+\Gread@gobject=\count103
 ))
 \Gin@req@height=\dimen112
 \Gin@req@width=\dimen113
@@ -148,10 +160,10 @@ Package: subfigure 2002/07/30 v2.1.4 subfigure package
 \subfigbottomskip=\skip48
 \subfigcapmargin=\dimen115
 \subfiglabelskip=\skip49
-\c@subfigure=\count101
-\c@lofdepth=\count102
-\c@subtable=\count103
-\c@lotdepth=\count104
+\c@subfigure=\count104
+\c@lofdepth=\count105
+\c@subtable=\count106
+\c@lotdepth=\count107
 
 ****************************************
 * Local config file subfigure.cfg used *
@@ -195,25 +207,25 @@ Loading kernel: messages; fonts; allocations: state,
 \Y@min=\dimen135
 \X@max=\dimen136
 \Y@max=\dimen137
-\lastobjectbox@=\box28
-\zerodotbox@=\box29
+\lastobjectbox@=\box29
+\zerodotbox@=\box30
 \almostz@=\dimen138
  direction,
 \d@X=\dimen139
 \d@Y=\dimen140
-\K@=\count105
-\KK@=\count106
-\Direction=\count107
+\K@=\count108
+\KK@=\count109
+\Direction=\count110
 \K@dXdY=\dimen141
 \K@dYdX=\dimen142
-\xyread@=\read2
-\xywrite@=\write3
-\csp@=\count108
+\xyread@=\read3
+\xywrite@=\write4
+\csp@=\count111
 \quotPTK@=\dimen143
 
 utility macros; pictures: \xy, positions,
 \swaptoks@@=\toks29
-\connectobjectbox@@=\box30
+\connectobjectbox@@=\box31
  objects,
 \styletoks@=\toks30
  decorations;
@@ -225,9 +237,9 @@ Package: xy 1999/02/16 Xy-pic version 3.7
  Xy-pic option: All features v.3.3
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\xypic\xycurve.tex"
  Xy-pic option: Curve and Spline extension v.3.7 curve,
-\crv@cnt@=\count109
+\crv@cnt@=\count112
 \crvpts@=\toks31
-\splinebox@=\box31
+\splinebox@=\box32
 \splineval@=\dimen144
 \splinedepth@=\dimen145
 \splinetol@=\dimen146
@@ -251,80 +263,79 @@ Package: xy 1999/02/16 Xy-pic version 3.7
  Xy-pic option: Colour extension v.3.3 loaded)
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\xypic\xymatrix.tex"
  Xy-pic option: Matrix feature v.3.4
-\Row=\count110
-\Col=\count111
+\Row=\count113
+\Col=\count114
 \queue@=\toks32
 \queue@@=\toks33
-\qcount@=\count112
-\qcount@@=\count113
-\matrixsize@=\count114
+\qcount@=\count115
+\qcount@@=\count116
+\matrixsize@=\count117
  loaded)
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\xypic\xyarrow.tex"
  Xy-pic option: Arrow and Path feature v.3.5 path, \ar, loaded)
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\xypic\xygraph.tex"
  Xy-pic option: Graph feature v.3.7 loaded) loaded))
-("C:\Users\mpinyol\Documents\Master\Module 3\Tracking\Report\tracking.aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
+(D:\Workspace\Module3\TrackingPrj\Report\tracking.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\unicode\ucsencs.def"
 File: ucsencs.def 2003/11/29 Fixes to fontencodings LGR, T3
 )
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\context\base\supp-pdf.tex"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count115
+\scratchcounter=\count118
 \scratchdimen=\dimen150
-\scratchbox=\box32
-\nofMPsegments=\count116
-\nofMParguments=\count117
+\scratchbox=\box33
+\nofMPsegments=\count119
+\nofMParguments=\count120
 \everyMPshowfont=\toks34
-\MPscratchCnt=\count118
+\MPscratchCnt=\count121
 \MPscratchDim=\dimen151
-\MPnumerator=\count119
+\MPnumerator=\count122
 \everyMPtoPDFconversion=\toks35
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 24.
+LaTeX Font Info:    Try loading font information for U+msa on input line 29.
  ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 24.
+LaTeX Font Info:    Try loading font information for U+msb on input line 29.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [1
 
-{C:/ProgramData/MiKTeX/2.8/pdftex/config/pdftex.map}]
-("C:\Users\mpinyol\Documents\Master\Module 3\Tracking\Report\introduction.tex"
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 3.
+{C:/Documents and Settings/All Users/Application Data/MiKTeX/2.8/pdftex/config/
+pdftex.map}] (D:\Workspace\Module3\TrackingPrj\Report\introduction.tex
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 4.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 3.
- <xymatrix 4x1
-120>
-Overfull \hbox (34.68555pt too wide) in paragraph at lines 3--7
-[] 
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 4.
+
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+
  []
 
-<xymatrix 4x3 234>
-Overfull \hbox (78.89899pt too wide) in paragraph at lines 8--16
-[] 
+<xymatrix 4x1 120>
+Underfull \hbox (badness 10000) in paragraph at lines 10--11
+
  []
 
-) ("C:\Users\mpinyol\Documents\Master\Module 3\Tracking\Report\segmentation.tex
-" [2]
+<xymatrix 4x3 272>) (D:\Workspace\Module3\TrackingPrj\Report\segmentation.tex
+[2]
 Overfull \hbox (19.31328pt too wide) detected at line 38
 []
  []
@@ -356,43 +367,50 @@ File: frame300.jpg Graphic file (type jpg)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) ("C:\Users\mpinyol\Documents\Master\Module 3\Tracking\Report\detection.tex"
-[3])
-("C:\Users\mpinyol\Documents\Master\Module 3\Tracking\Report\representation.tex
-") ("C:\Users\mpinyol\Documents\Master\Module 3\Tracking\Report\track.tex"
-[4 <C:/Users/mpinyol/Documents/Master/Module 3/Tracking/Report/frame300_segment
-ed.jpg> <C:/Users/mpinyol/Documents/Master/Module 3/Tracking/Report/frame300_se
-lectivity.jpg> <C:/Users/mpinyol/Documents/Master/Module 3/Tracking/Report/fram
-e300_eigenbackground.jpg> <C:/Users/mpinyol/Documents/Master/Module 3/Tracking/
-Report/frame300.jpg>])
-("C:\Users\mpinyol\Documents\Master\Module 3\Tracking\Report\tracking.bbl")
-[5] ("C:\Users\mpinyol\Documents\Master\Module 3\Tracking\Report\tracking.aux")
- ) 
+) (D:\Workspace\Module3\TrackingPrj\Report\detection.tex [3]
+<det_lluis.jpg, id=28, 145.29282pt x 185.94469pt>
+File: det_lluis.jpg Graphic file (type jpg)
+ <use det_lluis.jpg>)
+(D:\Workspace\Module3\TrackingPrj\Report\representation.tex [4 <D:/Workspace/Mo
+dule3/TrackingPrj/Report/frame300_segmented.jpg> <D:/Workspace/Module3/Tracking
+Prj/Report/frame300_selectivity.jpg> <D:/Workspace/Module3/TrackingPrj/Report/f
+rame300_eigenbackground.jpg> <D:/Workspace/Module3/TrackingPrj/Report/frame300.
+jpg>] <histogram_car.png, id=33, 1264.725pt x 707.64375pt>
+File: histogram_car.png Graphic file (type png)
+
+<use histogram_car.png>) (D:\Workspace\Module3\TrackingPrj\Report\track.tex
+[5 <D:/Workspace/Module3/TrackingPrj/Report/det_lluis.jpg>] [6 <D:/Workspace/Mo
+dule3/TrackingPrj/Report/histogram_car.png (PNG copy)>])
+(D:\Workspace\Module3\TrackingPrj\Report\conclusion.tex) [7]
+(D:\Workspace\Module3\TrackingPrj\Report\tracking.bbl) [8]
+(D:\Workspace\Module3\TrackingPrj\Report\tracking.aux) ) 
 Here is how much of TeX's memory you used:
- 4517 strings out of 495285
- 58332 string characters out of 3179873
- 156156 words of memory out of 3000000
- 7627 multiletter control sequences out of 15000+200000
- 13586 words of font info for 55 fonts, out of 3000000 for 9000
+ 4911 strings out of 495285
+ 64168 string characters out of 3179818
+ 164649 words of memory out of 3000000
+ 8011 multiletter control sequences out of 15000+200000
+ 13755 words of font info for 56 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 27i,11n,24p,586b,379s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-<C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmex10.pfb><C
-:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/
-Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Pro
-gram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Progra
-m Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program F
-iles (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program File
-s (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files (
-x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)
-/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/M
-iKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKT
-eX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX
- 2.8/fonts/type1/public/xypic/xyatip10.pfb><C:/Program Files (x86)/MiKTeX 2.8/f
-onts/type1/public/xypic/xybtip10.pfb>
-Output written on tracking.pdf (5 pages, 211265 bytes).
+ 27i,10n,24p,950b,379s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)
+/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files (x86)/M
+iKTeX 2.8/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiK
+TeX 2.8/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files (x86)/MiKTe
+X 2.8/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2
+.8/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.8/
+fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fon
+ts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/
+type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/typ
+e1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/pub
+lic/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public
+/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/a
+msfonts/cm/cmtt12.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/xyp
+ic/xyatip10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/xypic/xyb
+tip10.pfb>
+Output written on tracking.pdf (8 pages, 253013 bytes).
 PDF statistics:
- 78 PDF objects out of 1000 (max. 8388607)
+ 95 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -4,11 +4,16 @@
 \usepackage{ucs}
 \usepackage{amsmath}
 \usepackage{verbatim} 
+\usepackage{fancyvrb}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage[pdftex]{graphicx}
 \usepackage{subfigure}
 \usepackage[all]{xy}
+
+\DefineVerbatimEnvironment{code}{Verbatim}{fontsize=\small}
+\DefineVerbatimEnvironment{example}{Verbatim}{fontsize=\small}
+
 
 \author{
 	Llu\'{i}s-Pere de las Heras Caballero \and
@@ -30,8 +35,7 @@
 \input{detection}
 \input{representation}
 \input{track}
-
-\section{Conclusion}
+\input{conclusion}
 
 \bibliographystyle{plain}
 \bibliography{bibfile}

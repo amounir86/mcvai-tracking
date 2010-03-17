@@ -2,9 +2,27 @@
 
 In this section we will discuss the main module of the project which is the tracker. A simple Kalman filter tracker has been provided in the tracking framework. It uses results of the representer to track the position and the extent of the object being tracked. The Kalman filter works by estimating an unobservable state which is updated in time with a linear state update and additive Gaussian noise. It uses the technique described in \cite{Arulampalam01atutorial}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                                                                                                  %%
-%%   Here we should answer the two provided questions.                            %%
-%%   We should also solve the problems proposed in the detection part.     %%
-%%                                                                                                                  %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The basic Kalman filter provided in the framework estimates the position and the extent of the target. We also included the velocity and did the necessary modifications. Now the initializations for the Kalman filter is done as shown in the following snippet:
+
+\begin{verbatim}
+
+Tracker.H          = eye(6);        % System model
+Tracker.Q          = 0.1 * eye(6);  % System noise
+traker_state       = eye(6);        % Measurement model
+traker_state(1,3)  = 1;
+traker_state(2,4)  = 1;
+Tracker.F          = traker_state;
+Tracker.R          = 5 * eye(6);    % Measurement noise
+Tracker.innovation = 0;
+Tracker.track      = @multiple_kalman_step2;
+\end{verbatim}
+
+As we see we have to change the values of the update function F as well. It's no longer the identity matrix. Also we had to change the representation of the measurements of the state variable to tolerate these changes.
+
+We have to discuss 3 main issues in the tracker. The first issue is the effect of changing the noise parameters on the behaviour of the tracker. The second is the effect of having noise detections on the tracker. The third which was previously refered to in the representer is the effect of getting no readings from the detection on the tracker.
+
+Concerning the effect of the noise parameters changings. We observed that %% LLUIS WILL FILL THIS %%
+
+About the effect of noisy detections, %% LLUIS WILL FILL THIS %%
+
+Finally, when the detector fails to detect anything %% LLUIS WILL FILL THIS %%

@@ -1,17 +1,20 @@
 \section{Introduction}
+
 \begin{itemize}
 \item Simple Tracker \\ 
-\xymatrix{*+<0.5cm>[F-,]{Segmentation} \ar[r] & *+<0.5cm>[F-,]{Recognition}  \ar[r] &
+
+\xymatrix{*+<0.5cm>[F-,]{Segmentation} \ar[r] & *+<0.5cm>[F-,]{Detection}  \ar[r] &
 *+<0.5cm>[F-,]{Representation}  \ar[r] & *+<0.5cm>[F-,]{Tracking} 
 }
 
 \item Our Tracker\\ 
+
 \xymatrix{
-*+<0.5cm>[F-,]{Segmentation} \ar[r] \ar[d] & *+<0.5cm>[F-,]{Recognition} \ar[r] \ar[d] &
+*+<0.5cm>[F-,]{Segmentation} \ar[r] \ar[d] & *+<0.5cm>[F-,]{Detection} \ar[r] \ar[d] &
 *+<0.5cm>[F-,]{Representation}  \ar[r] & *+<0.5cm>[F-,]{Tracking} 
 \\
-*+<0.5cm>[F-,]{Grey-World} \ar[d] & *+<0.5cm>[F-,]{Face Recognition}\\
-*+<0.5cm>[F-,]{Eigenbackground}
+*+<0.5cm>[F-,]{Grey-World} \ar[d] & *+<0.5cm>[F-,]{Face Detection}\ar[d]\\
+*+<0.5cm>[F-,]{Eigenbackground}  & *+<0.5cm>[F-,]{Face recognition}
 }
 
 %\xymatrix{
