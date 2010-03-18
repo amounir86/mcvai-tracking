@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.3.15)  17 MAR 2010 15:48
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.3.18)  18 MAR 2010 21:25
 entering extended mode
-**D:/Workspace/Module3/TrackingPrj/Report/tracking.tex
-(D:/Workspace/Module3/TrackingPrj/Report/tracking.tex
+**tracking.tex
+("C:\Users\lpheras\Documents\Master\Module 3\all_code\Report\tracking.tex"
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
 rman, ngerman, german-x-2009-06-19, ngerman-x-2009-06-19, french, loaded.
@@ -275,19 +275,19 @@ Package: xy 1999/02/16 Xy-pic version 3.7
  Xy-pic option: Arrow and Path feature v.3.5 path, \ar, loaded)
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\xypic\xygraph.tex"
  Xy-pic option: Graph feature v.3.7 loaded) loaded))
-(D:\Workspace\Module3\TrackingPrj\Report\tracking.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
-LaTeX Font Info:    ... okay on input line 27.
+("C:\Users\lpheras\Documents\Master\Module 3\all_code\Report\tracking.aux")
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\unicode\ucsencs.def"
 File: ucsencs.def 2003/11/29 Fixes to fontencodings LGR, T3
@@ -305,18 +305,22 @@ File: ucsencs.def 2003/11/29 Fixes to fontencodings LGR, T3
 \MPnumerator=\count122
 \everyMPtoPDFconversion=\toks35
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 29.
+LaTeX Font Info:    Try loading font information for U+msa on input line 30.
  ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 29.
+LaTeX Font Info:    Try loading font information for U+msb on input line 30.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [1
 
-{C:/Documents and Settings/All Users/Application Data/MiKTeX/2.8/pdftex/config/
-pdftex.map}] (D:\Workspace\Module3\TrackingPrj\Report\introduction.tex
+{C:/ProgramData/MiKTeX/2.8/pdftex/config/pdftex.map}]
+("C:\Users\lpheras\Documents\Master\Module 3\all_code\Report\tracking.toc")
+\tf@toc=\write5
+
+[2]
+("C:\Users\lpheras\Documents\Master\Module 3\all_code\Report\introduction.tex"
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 4.
 
 ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
@@ -334,8 +338,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 10--11
 
  []
 
-<xymatrix 4x3 272>) (D:\Workspace\Module3\TrackingPrj\Report\segmentation.tex
-[2]
+<xymatrix 4x3 348>)
+("C:\Users\lpheras\Documents\Master\Module 3\all_code\Report\segmentation.tex"
+[3]
 Overfull \hbox (19.31328pt too wide) detected at line 38
 []
  []
@@ -345,7 +350,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 43--46
 
  []
 
-<frame300_segmented.jpg, id=17, 486.81876pt x 327.2225pt>
+<frame300_segmented.jpg, id=20, 486.81876pt x 327.2225pt>
 File: frame300_segmented.jpg Graphic file (type jpg)
 
 <use frame300_segmented.jpg>
@@ -353,64 +358,400 @@ Underfull \hbox (badness 2894) in paragraph at lines 51--51
 []\OT1/cmr/m/n/10 (a) Back-ground Sub-trac-
  []
 
-<frame300_selectivity.jpg, id=18, 486.81876pt x 327.2225pt>
+<frame300_selectivity.jpg, id=21, 486.81876pt x 327.2225pt>
 File: frame300_selectivity.jpg Graphic file (type jpg)
 
 <use frame300_selectivity.jpg>
-<frame300_eigenbackground.jpg, id=19, 486.81876pt x 327.2225pt>
+<frame300_eigenbackground.jpg, id=22, 486.81876pt x 327.2225pt>
 File: frame300_eigenbackground.jpg Graphic file (type jpg)
 
 <use frame300_eigenbackground.jpg>
-<frame300.jpg, id=20, 486.81876pt x 327.2225pt>
+<frame300.jpg, id=23, 486.81876pt x 327.2225pt>
 File: frame300.jpg Graphic file (type jpg)
  <use frame300.jpg>
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (D:\Workspace\Module3\TrackingPrj\Report\detection.tex [3]
-<det_lluis.jpg, id=28, 145.29282pt x 185.94469pt>
+) ("C:\Users\lpheras\Documents\Master\Module 3\all_code\Report\detection.tex"
+[4] <det_lluis.jpg, id=31, 145.29282pt x 185.94469pt>
 File: det_lluis.jpg Graphic file (type jpg)
  <use det_lluis.jpg>)
-(D:\Workspace\Module3\TrackingPrj\Report\representation.tex [4 <D:/Workspace/Mo
-dule3/TrackingPrj/Report/frame300_segmented.jpg> <D:/Workspace/Module3/Tracking
-Prj/Report/frame300_selectivity.jpg> <D:/Workspace/Module3/TrackingPrj/Report/f
-rame300_eigenbackground.jpg> <D:/Workspace/Module3/TrackingPrj/Report/frame300.
-jpg>] <histogram_car.png, id=33, 1264.725pt x 707.64375pt>
+("C:\Users\lpheras\Documents\Master\Module 3\all_code\Report\representation.tex
+" [5 <C:/Users/lpheras/Documents/Master/Module 3/all_code/Report/frame300_segme
+nted.jpg> <C:/Users/lpheras/Documents/Master/Module 3/all_code/Report/frame300_
+selectivity.jpg> <C:/Users/lpheras/Documents/Master/Module 3/all_code/Report/fr
+ame300_eigenbackground.jpg> <C:/Users/lpheras/Documents/Master/Module 3/all_cod
+e/Report/frame300.jpg>] <histogram_car.png, id=36, 1264.725pt x 707.64375pt>
 File: histogram_car.png Graphic file (type png)
 
-<use histogram_car.png>) (D:\Workspace\Module3\TrackingPrj\Report\track.tex
-[5 <D:/Workspace/Module3/TrackingPrj/Report/det_lluis.jpg>] [6 <D:/Workspace/Mo
-dule3/TrackingPrj/Report/histogram_car.png (PNG copy)>])
-(D:\Workspace\Module3\TrackingPrj\Report\conclusion.tex) [7]
-(D:\Workspace\Module3\TrackingPrj\Report\tracking.bbl) [8]
-(D:\Workspace\Module3\TrackingPrj\Report\tracking.aux) ) 
+<use histogram_car.png> [6 <C:/Users/lpheras/Documents/Master/Module 3/all_code
+/Report/det_lluis.jpg>])
+("C:\Users\lpheras\Documents\Master\Module 3\all_code\Report\track.tex"
+[7 <C:/Users/lpheras/Documents/Master/Module 3/all_code/Report/histogram_car.pn
+g (PNG copy)>]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.23 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Display math should end with $$.
+<to be read again> 
+                   \par 
+l.23 
+     
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.24 m_
+       {k} = [x_{k}, y_{k}, \.{x}_{k}, \.{y}_{k}, h_{k}, w_{k}]
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+LaTeX Warning: Command \. invalid in math mode on input line 24.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.24 m_{k} = [x_{k}, y_{k}, \.{x}
+                                 _{k}, \.{y}_{k}, h_{k}, w_{k}]
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.24 m_{k} = [x_{k}, y_{k}, \.{x}
+                                 _{k}, \.{y}_{k}, h_{k}, w_{k}]
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+LaTeX Warning: Command \. invalid in math mode on input line 24.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.24 m_{k} = [x_{k}, y_{k}, \.{x}_{k}, \.{y}
+                                            _{k}, h_{k}, w_{k}]
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.24 m_{k} = [x_{k}, y_{k}, \.{x}_{k}, \.{y}
+                                            _{k}, h_{k}, w_{k}]
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.25 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Missing character: There is no è in font cmex10!
+Missing character: There is no è in font cmex10!
+
+! LaTeX Error: Bad math environment delimiter.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.26 \end{equation}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! You can't use `\eqno' in vertical mode.
+\endmathdisplay@a ...\df@tag \@empty \else \veqno 
+                                                  \alt@tag \df@tag \fi \ifx ...
+l.26 \end{equation}
+                   
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.26 \end{equation}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Display math should end with $$.
+<to be read again> 
+                   \endgroup 
+l.26 \end{equation}
+                   
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.28 	\item x_
+              {t} and y_{t} are the position in both x and y coordinates.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 	\item
+            \.{x}_{t} and \.{y}_{t} are the velocities in each component.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 	\item \.
+              {x}_{t} and \.{y}_{t} are the velocities in each component.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.29 	\item \.
+              {x}_{t} and \.{y}_{t} are the velocities in each component.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Command \. invalid in math mode on input line 29.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.29 	\item \.{x}
+                 _{t} and \.{y}_{t} are the velocities in each component.
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.29 	\item \.{x}
+                 _{t} and \.{y}_{t} are the velocities in each component.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+LaTeX Warning: Command \. invalid in math mode on input line 29.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.29 	\item \.{x}_{t} and \.{y}
+                               _{t} are the velocities in each component.
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.29 	\item \.{x}_{t} and \.{y}
+                               _{t} are the velocities in each component.
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.30 	\item
+            h_{t} and w_{t} are the height and the with of the bounding-box ...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.30 	\item h
+             _{t} and w_{t} are the height and the with of the bounding-box ...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.30 	\item h
+             _{t} and w_{t} are the height and the with of the bounding-box ...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+Missing character: There is no è in font cmex10!
+Missing character: There is no è in font cmex10!
+
+Overfull \hbox (98.16048pt too wide) in paragraph at lines 28--30
+[]\OT1/cmr/m/n/12 x$[]\OML/cmm/m/it/12 andy[]arethepositioninbothxandycoordinat
+es:[][]and[][]arethevelocitiesineachcomponent:[][]$ 
+ []
+
+! Extra }, or forgotten \endgroup.
+\par ...m \@noitemerr {\@@par }\fi \else {\@@par }
+                                                  \fi 
+l.30 	\item h
+             _{t} and w_{t} are the height and the with of the bounding-box ...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.30 	\item h_
+              {t} and w_{t} are the height and the with of the bounding-box ...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.31 \end{itemize}
+                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.31 \end{itemize}
+                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.31 \end{itemize}
+                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.31 \end{itemize}
+                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+[8]
+! Undefined control sequence.
+l.35 ...en the new real measurement of the \texibf
+                                                  {Representer} and the pred...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+)
+Runaway argument?
+{Detector] are encountered inside a blob. When a face is found, the b\ETC.
+! File ended while scanning use of \textbf .
+<inserted text> 
+                \par 
+l.40 \input{track}
+                  
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+("C:\Users\lpheras\Documents\Master\Module 3\all_code\Report\conclusion.tex")
+[9] ("C:\Users\lpheras\Documents\Master\Module 3\all_code\Report\tracking.bbl")
+[10] ("C:\Users\lpheras\Documents\Master\Module 3\all_code\Report\tracking.aux"
+) ) 
 Here is how much of TeX's memory you used:
- 4911 strings out of 495285
- 64168 string characters out of 3179818
- 164649 words of memory out of 3000000
- 8011 multiletter control sequences out of 15000+200000
+ 4920 strings out of 495285
+ 64757 string characters out of 3179872
+ 165649 words of memory out of 3000000
+ 8017 multiletter control sequences out of 15000+200000
  13755 words of font info for 56 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 27i,10n,24p,950b,379s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files (x86)
-/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files (x86)/M
-iKTeX 2.8/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiK
-TeX 2.8/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files (x86)/MiKTe
-X 2.8/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files (x86)/MiKTeX 2
-.8/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKTeX 2.8/
-fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fon
-ts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/
-type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/typ
-e1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/p
-ublic/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/pub
-lic/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public
-/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/a
-msfonts/cm/cmtt12.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/xyp
-ic/xyatip10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/xypic/xyb
-tip10.pfb>
-Output written on tracking.pdf (8 pages, 253013 bytes).
+ 27i,10n,24p,1036b,376s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmex10.pfb><
+C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:
+/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program 
+Files (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Fil
+es (x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files 
+(x86)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86
+)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/
+MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiK
+TeX 2.8/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTe
+X 2.8/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Program Files (x86)/MiKTeX 
+2.8/fonts/type1/public/xypic/xyatip10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fo
+nts/type1/public/xypic/xybtip10.pfb>
+Output written on tracking.pdf (10 pages, 263193 bytes).
 PDF statistics:
- 95 PDF objects out of 1000 (max. 8388607)
+ 101 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

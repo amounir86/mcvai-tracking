@@ -25,4 +25,4 @@
 
 In this project our main focus is to build a single and multiple target tracker. We extend this approach to build a useful real-life application to that tracker which is a face recognizer and tracker.
 
-Our project first starts the normal tracking process which is segmentation and only determining the useful parts of the scene. We use these useful parts of the scene to detect the faces and correspond these faces to the interesting faces in the scene. We afterwards calculate the velocity of the person having this face and we keep tracking until the person leaves the scene or our tracker fails.
+The first step of our tracking process is \textbf{Segmentation}, which is the responsible of separate the foreground from the background . We use the foreground of the scene to detect the faces and correspond them to the ones which we are interested in. Afterwards, we calculate the velocity of the person having his/her face and we keep tracking until the person leaves the scene or our tracker fails.

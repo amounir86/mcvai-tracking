@@ -1,5 +1,5 @@
 \section{Segmentation}
-The process of segmentation is to separate the background to foreground.
+The aim of \textbf{Segmentation} is to separate the foreground from the background.
 
 \begin{itemize}
 \item The Background subtraction use three parameters: \textbf{gamma},\textbf{tau} and \textbf{radius}.
@@ -10,7 +10,7 @@ The process of segmentation is to separate the background to foreground.
 	\item Radius is the parameter to delete the little blobs.
 	\end{itemize}
 	
-\item The \textit{background subtraction} is not robustness to change illumination, for this we implement \textit{Grey-World} because is invariant to illuminant changes. 
+\item The \textit{background subtraction} is not robustness to change illumination, thus we implement \textit{Grey-World} which is an invariant to illuminant changes method. 
 The Grey-World method try to eliminate the grey in the image, for this reason move the minimum and the maximum values.
 
 \begin{equation}
@@ -28,7 +28,7 @@ The Grey-World method try to eliminate the grey in the image, for this reason mo
 	\right)
 \end{equation} 
 
-\item The \textit{selectivity} is the other method that use the simple different between foreground with background but the selectivity a prior knows that pixel is or isn't foreground. 
+\item The \textit{selectivity} is other method that uses the simple difference of foreground and background. It uses the prior knowledge weather that pixel is or isn't foreground. 
 	\begin{equation}
 	\left \{
 	\begin{array}{cccl}
