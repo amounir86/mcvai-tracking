@@ -1,20 +1,17 @@
-function y=greyWorld(Image)
+function newImage=greyWorld(frame)
+R=frame(:,:,1); %extract RGB the frame
+G=frame(:,:,2);
+B=frame(:,:,3);
 
-% Perform grayworld assumtion color balancing.
+meanR = mean(mean(R)); %mean of R
+meanG = mean(mean(G));
+meanB = mean(mean(B));
 
-r=Image(:,:,1);
-g=Image(:,:,2);
-b=Image(:,:,3);
+meanRGB = [meanR meanG meanB];
+grayValue = (meanR + meanG + meanB)/3; %mean of grey
 
-avgR = mean(mean(r));
-avgG = mean(mean(g));
-avgB = mean(mean(b));
+rgbPrima = grayValue./meanRGB; %ex: Rgrey/Rmean 
 
-avgRGB = [avgR avgG avgB];
-grayValue = (avgR + avgG + avgB)/3;
-
-scaleValue = grayValue./avgRGB;
-
-y(:,:,1) = scaleValue(1) * r;
-y(:,:,2) = scaleValue(2) * g;
-y(:,:,3) = scaleValue(3) * b;
+newImage(:,:,1) = rgbPrima(1) * R;
+newImage(:,:,2) = rgbPrima(2) * G;
+newImage(:,:,3) = rgbPrima(3) * B;
