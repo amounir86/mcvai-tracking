@@ -7,10 +7,10 @@ The requirements in this module was to not only extract the bounding box and the
 The velocity was calculated based on the location of the \textit{centroid} of the object being tracked as follows:
 
 \begin{equation}
-velocity = (centroid - old\_centroid) * fps
+velocity = (centroid - old\_centroid)% * fps
 \end{equation}
 
-where \textit{fps} is the frames per second in the video. Therefore, in this case we have to keep the centroid of the previous object being tracked.
+%where \textit{fps} is the frames per second in the video. Therefore, in this case we have to keep the centroid of the previous object being tracked.
 
 For the histogram, we calculated the color histogram for the object being tracked.
 

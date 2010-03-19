@@ -6,4 +6,10 @@ Sanjeev Arulampalam, Simon Maskell, Neil Gordon, and Tim Clapp.
   bayesian tracking.
 \newblock {\em IEEE Transactions on Signal Processing}, 50:174--188, 2001.
 
+\bibitem{fd}
+Sreekar Krishna.
+\newblock Open cv viola-jones face detection in matlab.
+\newblock
+  \urlstyle{leo}http://www.mathworks.com/matlabcentral/fileexchange/19912.
+
 \end{thebibliography}
