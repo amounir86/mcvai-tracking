@@ -1,0 +1,52 @@
+%\documentclass[12pt,a4paper]{article}
+\documentclass[12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{verbatim} 
+\usepackage{fancyvrb}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[pdftex]{graphicx}
+\usepackage{subfigure}
+\usepackage{url}
+\usepackage[all]{xy}
+
+
+\DefineVerbatimEnvironment{code}{Verbatim}{fontsize=\small}
+\DefineVerbatimEnvironment{example}{Verbatim}{fontsize=\small}
+
+
+\author{
+	Llu\'{i}s-Pere de las Heras Caballero \and
+	Ahmed Mounir Gad \and
+	M\'onica Pi\~{n}ol Naranjo
+}
+
+
+\title{Face recognition and tracking}
+
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+\tableofcontents
+\newpage
+
+\input{introduction}
+\input{segmentation}
+\input{detection}
+\input{representation}
+\input{track}
+\input{conclusion}
+
+\bibliographystyle{plain}
+\bibliography{bibfile}
+
+%\begin{thebibliography}{99}
+%\bibitem{fd} Paul Viola, Michael Jones;
+%\end{thebibliography}
+
+\end{document}

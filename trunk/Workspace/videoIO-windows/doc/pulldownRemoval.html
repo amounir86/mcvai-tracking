@@ -1,0 +1,372 @@
+<html>
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<title>Pulldown Removal with 32-bit videoIO on Windows</title>
+<link rel="stylesheet" href="videoio.css" type="text/css"></link>
+</head>
+
+<body>
+
+<h1>Pulldown Removal with 32-bit videoIO on Windows </h1>
+<p><i>by Gerald Dalley<br>
+April 2008</i></p>This document describes how to recover the original progressive 24fps frames from 
+certain types of 60 field-per-second videos using the 32-bit videoIO toolbox
+for Matlab on Windows.&nbsp;&nbsp;
+
+<p align="center">
+<img border="0" src="images/pulldownGoal.png" width="519" height="248"></p>
+
+<h2>Background</h2>
+
+<div class="quick">We assume that the reader is already familiar with the the basic concepts
+of <a href="http://en.wikipedia.org/wiki/Interlace">interlacing</a> and
+<a href="http://en.wikipedia.org/wiki/Telecine">pulldown</a>.  </div>
+
+
+As of early 2008, most consumer-grade high-definition camcorders use a mode 
+called "24PF", "PF24", "24F", "24PsF", or a few other names.  These modes 
+exist for some legacy reasons and are not really 
+the same thing as a true 24p recording (despite what the marketing materials
+suggest).  For this discussion, we will focus on the 24pf mode of the 
+Canon HG10 camcorder.  
+
+<p>For this camcorder, (a) whole 1920x0180 progressive video frames are captured 
+at 24 
+frames per second, then they are (b) scaled down to 1440x1080, (c) broken 
+up into fields, (d) processed with 2-3 pulldown, and (e) encoded using
+an AVCHD codec.  This means the video is stored as if it were 60 
+fields-per-second, interlaced (60i) using a somewhat new and very complex 
+encoding.  
+
+<p>If one were to simply decode this video 
+and use it as-is, 3 out of every 5 frames would have interlacing artifacts
+in them and the comb artifacts for these frames will be roughly twice as 
+bad as they would be had the video been captured as true 60i.  When 
+processing videos in Matlab, one often would much prefer recovering the
+original 24p frames.
+
+<p>To recover the original progressive frames, one must perform something 
+called "pulldown removal", "reverse pulldown", "inverse pulldown", 
+"inverse telecine", or "ivtc".&nbsp; Unfortunately, this is not a trivial task.
+
+<p>In this document we describe the easiest robust solution we have found
+for pulldown removal.&nbsp; The specific details may need to be adjusted for the 
+user's videos that are not obtained from a Canon HG10 or similar camcorder.&nbsp; 
+This method will only work on Windows with 32-bit applications (unless 
+you can find or build 64-bit ports of AviSynth, DeComb, and FDecimate).  
+Feel free to experiment and to tweak the instructions to try using ffdshow 
+for decoding instead of CoreAVC.</p>
+
+<h2><a name="required"></a>Required Software</h2>
+
+<ul>
+<li>Download and install <a href="http://www.avisynth.org/">AviSynth</a> 2.5 or 
+later.&nbsp; We will use the AviSynth system via ffdshow to do the pulldown removal.
+
+<li>Download <a href="http://neuron2.net/decomb/decombnew.html">DeComb for 
+  AviSynth</a> and place the files in your AviSynth plugins directory 
+  ("<a href="file:///C:/Program%20Files/AviSynth%202.5/plugins%22%20or%20similar"><tt>C:\Program Files\AviSynth 2.5\plugins</tt>" or similar</a>).&nbsp; DeComb will be 
+  used to reconstruct progressive frames.
+
+<li>Download <a href="http://neuron2.net/fdecimate/fdecimate.html">FDecimate for AviSynth</a>
+  and place the files in your AviSynth plugins directory.&nbsp; FDecimate will be used to eliminate
+  duplicate frames.
+
+<li>Download and install the 
+  <a href="http://www.softella.com/dsfm/index.en.htm">DirectShow Filter Manager</a>.  
+  This is a nice GUI tool for configuring defaults for DirectShow filters.  
+
+<li>Download and install <a href="http://blog.monogram.sk/janos/tools/monogram-graphstudio/">MONOGRAM GraphStudio</a>.  
+	This serves as an enhanced version of Microsoft's GraphEdit application.  
+    It's useful for building, configuring, and testing DirectShow filtergraphs.  GraphEdit may be used instead.
+
+<li>Download and install 
+  <a href="http://ffdshow-tryout.sourceforge.net/">ffdshow-tryout(s)</a>.  
+  You'll want the most recent version possible.&nbsp; We will need it for 
+  pulldown removal, even if the ffdshow video decoder does not work.&nbsp; When running
+  the installer, make sure you do a custom install and verify that ffdshow's AviSynth plugin 
+is installed.&nbsp;&nbsp;
+  
+<ul>
+<li><i>Clarification note: </i>ffdshow is a collection of DirectShow filters for 
+processing and decoding audio and video.&nbsp; There is an ffdshow plugin that 
+allows it to embed AviSynth.&nbsp; FDecimate and DeComb are plugins for 
+AviSynth.&nbsp; </li>
+</ul>
+
+<li>Purchase the <a href="www.corecodec.com">CoreAVC Professional decoder</a>.  
+  We  have found it to be the most robust codec available as of early 2008.  
+  Make sure you install the Haali Media Splitter if given the choice.&nbsp; If you 
+  do not want to spend the $15 right now, install the 
+  <a href="http://haali.cs.msu.ru/mkv/">Haali splitter</a> separately
+  and adjust the instructions below to use the "<tt>ffdshow Video Decoder</tt>" 
+  instead of the "<tt>CoreAVC Video Decoder</tt>".&nbsp; Also, if you are 
+decoding MPEG-2 DV-based video instead of AVCHD, you do not need CoreAVC.</ul>
+
+<h2>Basic Filter Configuration</h2>
+
+We need to make sure that the filters we have just installed are the defaults.  
+Launch the <a href="http://www.softella.com/dsfm/index.en.htm">DirectShow Filter Manager</a>:<p align="center">
+<img border="0" src="images/dsfm.png"></p>
+
+<h3>Haali Media Splitter Merit</h3>
+<p>Find the "<tt>Haali Media Splitter</tt>".  Double-click on it to launch the 
+     filter properties.&nbsp; If the "<tt>Filter merit</tt>" is below <tt>0x00800001</tt>, then
+     change it to that value and click the "<tt>Set new merit</tt>" button.
+     
+<p align="center">
+<img border="0" src="images/haali.png"><p>Close the dialog.
+     
+<p>The Haali splitter is the only one we know that
+     handles transport streams correctly (ArcSoft, CyberLink, and most 
+     others incorrectly report the AVCHD video stream as MPEG2).
+     
+<h3>CoreAVC Configuration</h3>
+<p>Open the filter properties of the "<tt>CoreAVC Video Decoder</tt>".&nbsp; Press 
+     the "<tt>Filter settings</tt>" button.&nbsp; Place <tt>YUY2</tt> as the preferred output 
+     format (move that one to the top of the list).&nbsp; The DeComb AviSynth 
+filter requires either YUY2 or YV12
+     and YUY2 is higher-quality.&nbsp; Change the deinterlacing setting to "<tt>None (Weave)</tt>".&nbsp; If the deinterlacer is not disabled, it will destroy some of the information we wish
+     to recover.&nbsp;  Check "<tt>Crop 1088 to 1080</tt>".&nbsp; AVCHD videos must have a height that is
+     evenly divisible by 16, so 1080 videos are padded to 1088.&nbsp; This 
+checkbox reverses the padding.&nbsp; Check 
+     "<tt>Preferred decoder</tt>".  
+     
+     
+     <p align="center">
+		<img border="0" src="images/coreavcconfig.png" width="707" height="612"><p>When you dismiss the settings dialog, verify
+     that the filter merit is greater than <tt>0x00800000</tt>.&nbsp;
+     
+<p align="center">
+<img border="0" src="images/coreavcmerit.png" width="596" height="326"><p>These changes
+     will make CoreAVC the default and have it output non-deinterlaced
+     frames.
+     
+<h3>ffdshow Video Decoder Merit</h3>
+<p>Change the "<tt>ffdshow Video Decoder</tt>"'s merit to something below
+     <tt>0x00800000</tt> (<tt>0x00600000</tt> is a good value).&nbsp; We need 
+     to make sure that the CoreAVC decoder gets chosen instead of ffdshow.&nbsp; 
+If you want to test ffdshow, just set its merit to be larger than CoreAVC's.
+     
+<p align="center">
+<img border="0" src="images/ffdshowmerit.png" width="596" height="326">
+
+<h3>ffdshow raw video filter Merit</h3>
+<p>Change the "<tt>ffdshow raw video filter</tt>"'s merit (<b>not</b> the &quot;<tt>ffdshow Video 
+Decoder</tt>&quot;'s) to a value larger
+     than <tt>0x00800001</tt>.&nbsp; We used <tt>0xFFFF0000</tt>.
+     
+<p align="center">
+<img border="0" src="images/ffdshowrvfmerit.png" width="596" height="326"><p>This will cause the ffdshow 
+     filter to be automatically inserted whenever a "<tt>Video Renderer</tt>" is 
+     used, such as when troubleshooting in GraphStudio.  
+     
+     <p>If you are using
+     ffdshow for decoding instead of CoreAVC, make sure the raw filter's merit 
+     is <tt>0</tt> so it will never be automatically instantiated.  The ffdshow decoder will 
+     already perform the filtering and we don't want to filter the video 
+     twice.
+     
+<h3>Reboot</h3>
+<p>Sometimes the filter merit settings do not take effect 
+     without a reboot.
+
+
+<h2>ffdshow Configuration</h2>
+
+We will now configure the "<tt>ffdshow raw video filter</tt>" to do 
+the pulldown removal for Canon HG10 videos.&nbsp; If you are using the 
+"<tt>ffdshow Video Decoder</tt>" for decoding instead of CoreAVC, 
+make the changes to that filter instead of the raw video filter.
+
+<h3>Creating a Profile</h3>
+
+<p>In the DirectShow Filter Manager, open the filter settings dialog
+for the "<tt>ffdshow raw video filter</tt>".&nbsp; We will be creating a 
+new preset for these videos so that other videos that use ffdshow 
+will not be affected.
+
+<ol>
+<li>Select the "<tt>Profiles / Preset settings</tt>" in the leftmost listbox.
+<li>On the right, press the "<tt>New</tt>" button to create a new profile.  
+<li>Press the "<tt>Rename</tt>" button and choose the name "<tt>hg10pf24coreavc</tt>" 
+or some other descriptive name. 
+<li>Make sure "<b><tt>default</tt></b>" is still bold.  
+If it isn't, double click on "<b><tt>default</tt></b>" to make it really be the 
+default, then click on "<tt>hg10pf24coreavc</tt>&quot; again so the remaining 
+modifications will apply to our new profile. 
+<li>Check the "<tt>Automatic preset loading</tt>" checkbox. 
+<li>Check the "<tt>Try to load preset from file first</tt>" checkbox.
+</ol>
+
+<p align="center"><img border="0" src="images/ffdprofile.png" width="587" height="513"></p>
+
+<h3>
+Autoload Configuration</h3>
+<p>
+Press the "<tt>Preset autoload conditions...</tt>" button.&nbsp; Here we will 
+set some heuristics to let the filter know on which videos it should apply the pulldown 
+removal.&nbsp; Adjust these as appropriate for your videos.<ol>
+<li>Select the "<tt>On all conditions match (AND)</tt>" radio button.
+<li>Check the "<tt>on movie dimensions match</tt>" checkbox.
+<li>Put <tt>1440</tt> as the minimum and maximum width.
+<li>Put <tt>1080</tt> as the minimum height.
+<li>Put <tt>1088</tt> as the maximum height.
+<li>Check the "<tt>on a DirectShow filter presence</tt>" checkbox and add 
+     "<tt>Core AVC Video Decoder</tt>" to its textbox.&nbsp; This is a trick to avoid processing 
+     30pf MPEG2 streams that do not need pulldown removal (because 30pf decodes 
+the same as true 30p).
+<li>Check the "<tt>on frame rate match</tt>" checkbox and add
+     "<tt>fps>=29.9 AND fps<=30</tt>" to its textbox.  24pf will be reported as 30p.&nbsp; 
+If you have AVCHD 30p or 30pf content, you may need to figure out some 
+additional heuristics.</ol>
+     
+<p align="center"><img border="0" src="images/ffdauto.png" width="283" height="535"><h3>
+Resize &amp; aspect</h3>
+<p>The combination of CoreAVC and ffdshow often result in the video being 
+rescaled and letterboxed if care is not taken.&nbsp; We can prevent the resizing 
+from happening by forcing the size to be what we want (1440x1080).&nbsp; </p>
+<p>On the right pane in the top left corner, make sure that &quot;<tt>hg10pf24coreavc</tt>&quot; 
+is selected (instead of &quot;<tt>default</tt>&quot; or some other profile).&nbsp; </p>
+<ol>
+	<li>On the 
+left treeview, check the &quot;<tt>Resize &amp; aspect</tt>&quot; entry.&nbsp;&nbsp; On the 
+right again, 
+	<ol>
+		<li>check the &quot;<tt>Resize</tt>&quot;&nbsp; checkbox, </li>
+		<li>select the &quot;<tt>Specify 
+horizontal and vertical size</tt>&quot; radio button, </li>
+		<li>type &quot;<tt>1440</tt>&quot; 
+x &quot;<tt>1080</tt>&quot; in the &quot;<tt>New Size</tt>&quot; area, and </li>
+		<li>choose &quot;<tt>4</tt>&quot;:&quot;<tt>3</tt>&quot; 
+as the aspect ratio.&nbsp;&nbsp; </li>
+	</ol>
+	</li>
+	<li>On the rightmost inner panel, 
+	<ol>
+		<li>choose the &quot;<tt>Resize 
+always</tt>&quot; radio button, </li>
+		<li>check the &quot;<tt>Process pixel aspect ratio 
+internally</tt>&quot; checkbox, and </li>
+		<li>enter &quot;<tt>4</tt>&quot; x &quot;<tt>3</tt>&quot; 
+as the &quot;<tt>PAR of output device</tt>&quot;.&nbsp; </li>
+	</ol>
+	</li>
+	<li>In the lower panel, choose &quot;<tt>No 
+aspect ratio correction</tt>&quot;.&nbsp; </li>
+</ol>
+<p>The properties box should look like this:</p>
+<p align="center">
+<img border="0" src="images/ffdresize.png" width="587" height="513"></p>
+<p>Our white treeview on the left of the dialog is likely simpler than yours 
+since we removed most of the filters using the &quot;<tt>Show / hide filters</tt>&quot; 
+option.&nbsp; This is purely a personal preference (unless you wish to use those 
+filters).</p>
+<h3>Pulldown Removal via AviSynth</h3>
+<p>We are now finally ready to configure the pulldown removal.&nbsp; We assume 
+that the AviSynth and the DeComb and FDecimate filters have been
+<a href="#required">installed as previously described</a>.&nbsp; </p>
+<ol>
+	<li>On the right pane in the top left corner, make sure that &quot;<tt>hg10pf24coreavc</tt>&quot; 
+is selected (instead of &quot;<tt>default</tt>&quot; or some other profile).&nbsp; 
+	</li>
+	<li>On the 
+left treeview, check the &quot;<tt>AviSynth</tt>&quot; entry.&nbsp; </li>
+	<li>On the right 
+again, check all of the checkboxes that are not already checked:<ol>
+		<li>&quot;<tt>AviSynth</tt>&quot;,</li>
+		<li>&quot;<tt>Add 
+ffdshow video source</tt>&quot;,</li>
+		<li>all of the input colorspaces (or at least <tt>YUY2</tt>), 
+and </li>
+		<li>&quot;<tt>Buffer back/ahead</tt>&quot;.&nbsp; </li>
+	</ol>
+	</li>
+	<li>Set the buffer values to &quot;<tt>8</tt>&quot; 
+and &quot;<tt>8</tt>&quot;.&nbsp; </li>
+	<li>The large textbox is a space for AviSynth scripts.&nbsp; 
+Enter the following script (it's okay to remove the comments):</li>
+</ol>
+<blockquote>
+	<pre class="comment"># Tell AviSynth it's a 30fps source.  It doesn't matter if it's </pre>
+	<pre class="comment"># really an NTSC 29.97fps source.  The rates are only used </pre>
+	<pre class="comment"># internally.</pre>
+	<pre>AssumeFPS(30) </pre>
+	<pre>&nbsp;</pre>
+	<pre class="comment"># Assume that the top field is first (bottom first is very rare)</pre>
+	<pre>AssumeTFF()</pre>
+	<pre>&nbsp;</pre>
+	<pre class="comment"># Use the DeComb filter without extra postprocessing in 2-3</pre>
+	<pre class="comment"># pulldown reversal mode.  This will reconstruct 30fps progressive</pre>
+	<pre class="comment"># frames.  For clean sources, every 5th frame will be a duplicate.</pre>
+	<pre>Telecide(guide=1,post=0)</pre>
+	<pre>&nbsp;</pre>
+	<pre class="comment"># Drop the duplicate frames.  For clean sources, every 5th frame</pre>
+	<pre class="comment"># will be dropped because 30/(30-24)=5.</pre>
+	<pre>FDecimate(rate=24,show=false)</pre>
+</blockquote>
+<p>The dialog should now look like this (shown with the script comments removed):</p>
+<p align="center">
+<img border="0" src="images/ffdivtc.png" width="587" height="513"></p>
+<p>Feel free to explore the rest of the ffdshow options as desired.&nbsp; Note 
+that turning on the onscreen display (&quot;<tt>OSD</tt>&quot; in the left white 
+treeview) can sometimes confuse for the DeComb filter.</p>
+<h2>GraphStudio Testing</h2>
+<p>Before testing videoIO, it is useful to test the configuration with 
+GraphStudio.&nbsp; Launch GraphStudio and load the <tt>tests/hg10-pf24-clip2.mts</tt> clip.</p>
+<p align="center">
+<img border="0" src="images/filtergraph.png" width="672" height="355"></p>
+<p>If you are using CoreAVC, make sure that that filter is instantiated as well 
+as the &quot;<tt>ffdshow raw video filter</tt>&quot;.&nbsp; </p>
+<p>If instead you are using the 
+&quot;<tt>ffdshow Video Filter</tt>&quot;, make sure that the raw filter is not
+also instantiated.&nbsp; </p>
+<p>Press the play and/or single step buttons to view the 
+results.&nbsp; You should see a clean video without any comb artifacts like 
+those in the image at the very top of this article.</p>
+<h2>videoIO Testing</h2>
+<p>Launch Matlab and try running the following code:</p>
+<blockquote>
+	<pre class="comment">% The file of interest is in the tests/ directory</pre>
+	<pre>cd(fullfile(videoIODir, 'tests'));</pre>
+	<pre>file     = 'hg10-pf24-clip2.mts';</pre>
+	<pre class="comment">% Here's an early frame that shows combing </pre>
+	<pre>frameNum = 125;</pre>
+	<pre class="comment">&nbsp;</pre>
+	<pre class="comment">% Original video without pulldown removal</pre>
+	<pre>vrOrig   = videoReader(file, 'preciseFrames',-1);</pre>
+	<pre class="comment">% With pulldown removal </pre>
+	<pre>vrIvtc   = videoReader(file, 'preciseFrames',-1, ...</pre>
+	<pre>                       'dfilters','ffdshow raw video filter');</pre>
+	<pre>&nbsp;</pre>
+	<pre class="comment">% show the frame of interest in the original video</pre>
+	<pre>seek(vrOrig, frameNum)</pre>
+	<pre>figure(1); imshow(getframe(vrOrig)); title('with combing');</pre>
+	<pre class="comment">&nbsp;</pre>
+	<pre class="comment">% show the equivalent frame after removal (w/ framerate conversion)</pre>
+	<pre>seek(vrIvtc, frameNum*4/5)</pre>
+	<pre>figure(2); imshow(getframe(vrIvtc)); title('pulldown removed');</pre>
+	<pre class="comment">&nbsp;</pre>
+	<pre class="comment">% cleanup</pre>
+	<pre>vrOrig = close(vrOrig);</pre>
+	<pre>vrIvtc = close(vrIvtc);</pre>
+</blockquote>
+<p>There should be a very obvious difference between the two figures when 
+looking at the gray car.&nbsp; </p>
+<p>Note that with version 1.6.2.5 of CoreAVC, <tt>'preciseFrames',-1</tt>
+must be used in the <tt>videoReader</tt> constructor because seeking is partially broken.&nbsp; The CoreAVC team is 
+working on fixing this issue, so future versions are likely to work.</p>
+<h2>Extra Reading</h2>
+<p>For more information on reverse pulldown, see:
+<ul>
+<li>
+<a href="http://www.dvdfile.com/news/special_report/production_a_z/3_2_pulldown.htm">http://www.dvdfile.com/news/special_report/production_a_z/3_2_pulldown.htm</a>
+<li> <a href="http://en.wikipedia.org/wiki/Telecine">http://en.wikipedia.org/wiki/Telecine</a>
+<li> <a href="http://www.doom9.org/index.html?/decomb.htm">http://www.doom9.org/index.html?/decomb.htm</a>
+<li> <a href="http://www.doom9.org/index.html?/decomb.htm">http://neuron2.net/decomb/decombnew.html</a>
+<li> <a href="http://neuron2.net/fdecimate/fdecimate.html">http://neuron2.net/fdecimate/fdecimate.html</a> 
+ </ul>
+
+
+</body>
+</html>

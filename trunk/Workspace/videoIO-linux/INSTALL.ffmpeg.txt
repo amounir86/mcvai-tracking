@@ -1,0 +1,315 @@
+This file describes how to compile the MEX plugins for videoIO (videoReader 
+and videoWriter) on a GNU/Linux and related platforms.  See README.txt for a 
+more general description of this library and tips on using it.
+
+++==================++
+||  Prerequisites:  ||
+++==================++
+
+ * GNU/Linux, 32-bit or 64-bit
+      It should work with any Linux distribution that supports Matlab and 
+      ffmpeg.  We used the Debian Sarge and Debian Etch distributions for 
+      testing.  We assume that standard development packages such as gcc, 
+      perl, and subversion have been installed.  We also assume that you have 
+      sudo permissions, root permissions, or the ability to adjust 
+      installation instructions.  It will also likely work on BSD platforms 
+      (e.g. Mac OS/X), but this has not been tested yet.  If you get it to 
+      work on one of these platforms, please let us know.  
+      
+ * Matlab 6.5 or newer (R14sp1 and R14sp2 are problematic)
+      This library should work on any version of Matlab after 6.5 when used
+      with a compatible version of gcc (which isn't always practical).  See
+        http://www.mathworks.com/support/tech-notes/1600/1601.html
+      for a compatibility list for Matlab and gcc versions.  Matlab R14sp1 and
+      R14sp2 are very picky and will fail if an incompatible gcc version is 
+      used.  32-bit Matlab 6.5, R14sp3, R2006a, R2006b, R2007a, and 64-bit 
+      Matlab R14sp2, R2006a, R2006b, and R2007a all work with gcc 3.3.5.  When
+      using an incompatible version of gcc, you might need to use the 
+      ffmpegPopen2 plugins and not the ffmpegDirect plugins.  See the 
+      documentation in @videoReader/videoReader.m for details if you are
+      curious.
+      
+ * ffmpeg, 0.4.9-pre1 Debian Sarge stable package
+ * ffmpeg, Debian Etch stable package 
+    (libavutil 49.0.0, libavcodec 51.11.0, libavformat 50.5.0)
+ * ffmpeg, numerous subversion revisions between summer 2006 and summer 2007
+      The ffmpegPopen2 and ffmpegDirect plugins are wrappers around the ffmpeg
+      libraries libavcodec and libavformat, so they must be installed.  Since
+      0.4.9-pre1 is a very widely-distributed version of these libraries, we
+      support them.  Note that significant enhancements have been made in the 
+      ffmpeg library after the 0.4.9-pre1 revision.  Most notably, additional 
+      codecs are supported and the ability to know the length of the video 
+      file was added (see @videoReader/get).  Details on installing ffmpeg 
+      are given below.
+      
+ * Knowledge
+      We assume you have at least a passing familiarity with compiling
+      C/C++ programs and that you know what environment variables are (or 
+      can follow directions exactly).  
+
+On 5 June 2007, subversion revision 390 of the videoIO library was tested with 
+the following software configurations:
+
+  Debian          pointer  libavcodec
+  Distr.   gcc    size     version     Matlab          Result
+  ------   -----  -------  ----------  ------          ------
+  Sarge    3.3.5  32-bit   0.4.9-pre1  6.5   (R13sp1)  passed all tests
+  Sarge    3.3.5  32-bit   0.4.9-pre1  7.0.1 (R14sp1)  FAILED(2)
+  Sarge    3.3.5  32-bit   0.4.9-pre1  7.0.4 (R14sp2)  FAILED(2)
+  Sarge    3.3.5  32-bit   0.4.9-pre1  7.1   (R14sp3)  passed all tests
+  Sarge    3.3.5  32-bit   0.4.9-pre1  7.2.0 (R2006a)  passed all tests
+  Sarge    3.3.5  32-bit   0.4.9-pre1  7.3.0 (R2006b)  passed all tests
+  Sarge    3.3.5  32-bit   0.4.9-pre1  7.4.0 (R2007a)  passed all tests
+  
+  Sarge    3.3.5  32-bit   51.40.4     6.5   (R13sp1)  passed all tests
+  Sarge    3.3.5  32-bit   51.40.4     7.0.1 (R14sp1)  FAILED(2)
+  Sarge    3.3.5  32-bit   51.40.4     7.0.4 (R14sp2)  FAILED(2)
+  Sarge    3.3.5  32-bit   51.40.4     7.1   (R14sp3)  passed all tests
+  Sarge    3.3.5  32-bit   51.40.4     7.2.0 (R2006a)  passed all tests
+  Sarge    3.3.5  32-bit   51.40.4     7.3.0 (R2006b)  passed all tests
+  Sarge    3.3.5  32-bit   51.40.4     7.4.0 (R2007a)  passed all tests
+
+  Sarge    3.3.5  64-bit   0.4.9-pre1  N/A             FAILED(1) 
+  
+  Sarge    3.3.5  64-bit   51.40.4     7.0.4 (R14sp2)  passed all tests
+  Sarge    3.3.5  64-bit   51.40.4     7.2.0 (R2006a)  passed all tests
+  Sarge    3.3.5  64-bit   51.40.4     7.3.0 (R2006b)  passed all tests
+  Sarge    3.3.5  64-bit   51.40.4     7.4.0 (R2007a)  passed all tests
+  
+  Etch     4.1.2  64-bit   0.4.9-pre1  N/A             FAILED(1)
+  
+  Etch     4.1.2  64-bit   51.40.4     7.2.0 (R2006a)  passed all tests
+  Etch     4.1.2  64-bit   51.40.4     7.3.0 (R2006b)  passed all tests
+  Etch     4.1.2  64-bit   51.40.4     7.4.0 (R2007a)  passed all tests
+  
+  (1) We could not link to ffmpeg since the Debian binary version was not
+      compiled with -fPIC.
+  (2) gcc 3.3.5 is incompatible with Matlab R14sp1 and R14sp2 and these 
+      versions crash when mexErrMsgTxt is called.  MathWorks fixed this
+      issue in R14sp3.  For details, see
+          http://www.mathworks.com/support/solutions/data/1-QBCS1.html
+
+
+++=============================++
+||  Installation Instructions: ||
+++=============================++
+
+There are three major parts to installing this library.  First, the ffmpeg 
+library must be installed.  Then, the video plugins must be built and added
+to the Matlab path.  Finally, some test scripts have been provided to validate
+the process.
+
+Installing ffmpeg
+=================
+There are a number of ways of installing ffmpeg.  Most users who are reading
+this section will want to use their Linux distribution's package manager if 
+they are using the latest stable version of their Linux distribution.  
+
+Below we give instructions for installing ffmpeg's libraries as packages on 
+Debian GNU/Linux, from the source, and from the source for 32-bit ffmpeg on 
+64-bit GNU/Linux.  Choose the most appropriate section for your system.
+
+Installing ffmpeg as Debian packages
+------------------------------------
+On Debian, Ubuntu, or other Debian-derived systems, type
+
+  sudo apt-get install ffmpeg
+  
+in a shell.  If your package manager offers development versions, make sure 
+they are installed.  They may be listed under libavcodec-dev, libavformat-dev, 
+and/or libpostproc-dev.  As of 31 Aug. 2007, the lenny version of Debian has 
+carved out the swscale library from the core ffmpeg distribution so you may 
+need to install the libswscale1d package as well.
+
+Users have reported that under Ubuntu 7.10, the libavformat-dev, 
+libavcodec-dev, libavutil-dev, and libswscale-dev packages must be installed.
+
+After installing ffmpeg, check which version of ffmpeg was installed.  If the
+version is 0.4.9-pre1 or earlier (many distributions created prior to 2007
+used this version), consider either upgrading your distribution or switching
+to the most recent source code repository version of ffmpeg.  If you have a 
+later version or do not want to build ffmpeg from sources, skip to "Building 
+the Plugins".
+
+Installing ffmpeg from subversion
+---------------------------------
+For those interested in having the latest and greatest version of ffmpeg,
+ffmpeg can be reasonably easily installed from the sources by following these
+instructions.
+
+First, remove any old installations of ffmpeg to avoid accidental conflicts.
+For example, on Debian GNU/Linux, type
+
+  sudo apt-get remove -qq 'ffmpeg*' 
+  sudo apt-get remove -qq 'libavcodec*'
+  sudo apt-get remove -qq 'libavformat*'
+  sudo apt-get remove -qq 'libswscale*' 
+  sudo apt-get remove -qq 'libpostproc*'
+  
+For other distributions, use your package manager as appropriate to uninstall
+ffmpeg, libavcodec, libavformat, libswscale1d, and libpostproc.
+
+To be safe, on all systems, run the following:
+
+  cd /usr/local/src/ffmpeg && sudo make uninstall
+  cd /usr/local/lib        && sudo rm libavformat* libavutil* libswscale* libpostproc*
+  cd /usr/local/lib32      && sudo rm libavformat* libavutil* libswscale* libpostproc*
+  cd /usr/local/lib64      && sudo rm libavformat* libavutil* libswscale* libpostproc*
+  sudo rm -rf /usr/local/include/ffmpeg/ 
+  
+  cd /usr/src/ffmpeg && sudo make uninstall
+  cd /usr/lib        && sudo rm libavformat* libavutil* libswscale* libpostproc*
+  cd /usr/lib32      && sudo rm libavformat* libavutil* libswscale* libpostproc*
+  cd /usr/lib64      && sudo rm libavformat* libavutil* libswscale* libpostproc*
+  sudo rm -rf /usr/include/ffmpeg/ 
+  
+  sudo rm -rf /usr/local/src/ffmpeg
+  
+If any of the above commands complain about files and/or directories not 
+existing, just continue on.
+
+Now that ffmpeg is completely gone, it's time to download the lastest version.
+We assume you have a subversion (svn) client installed already.
+
+  cd /tmp && svn checkout svn://svn.mplayerhq.hu/ffmpeg/trunk ffmpeg 
+  sudo mv ffmpeg/ /usr/local/src/  
+  
+Finally, build and install ffmpeg:
+
+  cd /usr/local/src/ffmpeg 
+  make distclean
+  ./configure --enable-gpl --enable-pthreads --enable-shared --enable-swscale
+  make 
+  cd /usr/local/src/ffmpeg ; sudo make install
+  
+You may adjust the options to "./configure" above as desired.  Type
+
+  ./configure --help 
+  
+to see a list of options.  The videoIO library assumes that 
+"--enable-swscaler" was used.  Unless your operating system uses exactly 
+the same version of GCC as Matlab, the "--enable-shared" option is
+nearly always required.  The other options included above are optional (but 
+recommended for most users).  
+
+Installing 32-bit ffmpeg on 64-bit GNU/Linux
+--------------------------------------------
+Occasionally, some users need to run 32-bit Matlab on 64-bit GNU/Linux.  In
+such environments, it can be beneficial to build and install 32-bit ffmpeg
+binaries on the 64-bit system.  Note that, as of 19 Feb. 2008, MathWorks does
+not officially support mixed-mode systems and recommends that 64-bit Matlab
+be used on 64-bit GNU/Linux.
+
+The following instructions are condensed steps for building 32-bit ffmpeg
+on a Debian-based system.  They are essentially a tweaked version of the
+previous section with the extra necessary steps for mixed-mode builds.  Using 
+these instructions, it is possible to have both 32-bit and 64-bit ffmpeg 
+coexisting on your system.
+
+  # install core 32-bit OS libraries
+  sudo apt-get install ia32-libs lib32stdc++6-4.1-dbg lib32z1-dev
+
+  # we need an independent copy of ffmpeg for 32-bit installation
+  cd /tmp; svn checkout svn://svn.mplayerhq.hu/ffmpeg/trunk ffmpeg32
+  sudo mv /tmp/ffmpeg32 /usr/local/src/ffmpeg32
+
+  # configure and build
+  make distclean
+  ./configure --enable-gpl --enable-pthreads --enable-shared \
+              --enable-swscaler --libdir=/usr/local/lib32 \
+              --shlibdir=/usr/local/lib32 --arch=x86_32 \
+              --cross-compile --extra-cflags="-m32" \
+              --extra-ldflags="-L/usr/lib32 -L/usr/local/lib32 -m32 \
+              -Wl,-rpath='/usr/local/lib32:/usr/lib32'" \
+              --disable-ffmpeg --disable-ffserver --disable-ffplay
+  make
+
+  # install
+  sudo make install
+
+We disable ffmpeg, ffserver, and ffplay under the assumption that most users
+will also install 64-bit ffmpeg.  If you only need 32-bit ffmpeg, feel free
+to allow these programs to be built too.
+
+Building the Plugins
+====================
+We strongly recommend installing videoIO on the local hard drive and *not*
+on a networked location such as your home directory (see FAQ.txt for the
+reasons).  Here are some options you might consider for the installation
+directory:
+
+  /usr/local/matlab/videoIO
+  /usr/local/src/videoIO
+  /opt/videoIO
+  /scratch/$USER/videoIO  # where $USER is replaced by your username 
+
+In the remainder of this section, we will refer to your chosen directory as
+[videoIODir].  
+
+If you are using a mixed-mode system (i.e. a 64-bit system where either 
+Matlab and/or ffmpeg is 32-bit), please read the usage section of makefile
+and skip the rest of this section.
+
+If you would like to control the compilation more finely, videoIO's makefile
+offers a number of options that are extensively documented in the makefile
+itself.
+
+You may build the videoIO plugins either by typing the following at a shell
+prompt:
+  
+  cd [videoIODir] ; make
+  
+or you may start Matlab and type
+  
+  cd [videoIODir] ; buildVideoIO
+  
+Matlab Path
+===========
+Once you have successfully built the plugins, you will want 
+to add [videoIODir] to your Matlab path (type "help path" without quotes in 
+Matlab for instructions).
+
+You should *not* add directories recursively: the @videoReader/,
+@videoWriter/, and private/ directories are handled automatically by Matlab's 
+object system.  The tests/ subdirectory contains files that are essentially 
+private and will likely be named the same as the user's own functions or 
+functions in other toolboxes.
+
+32-bit ffmpeg, 32-bit Matlab, and 64-bit Systems
+================================================
+If you will be using 32-bit ffmpeg and 32-bit Matlab on a 64-bit system, and 
+if you want to be able to use the ffmpegDirect plugins, you will need to tweak
+the LD_LIBRARY_PATH.  Assuming that the 32-bit ffmpeg libraries are installed 
+in /usr/local/lib32 or /usr/lib32 and that you are using the bash shell, 
+Matlab must be started as follows:
+  
+  export LD_LIBRARY_PATH=/usr/local/lib32:/usr/lib32:$LD_LIBRARY_PATH
+  matlab -glnx86 [add whatever options you'd normally use here]
+
+Do not put this LD_LIBRARY_PATH change in your startup scripts.  Only use it
+for starting 32-bit Matlab on the 64-bit systems.  Do not use it when starting
+64-bit Matlab.  Do not use it when starting any 64-bit programs.  
+
+Testing
+=======
+In Matlab, go to the [videoIODir]/tests/ subdirectory and run testAll:
+  
+  cd(fullfile(videoIODir, 'tests')); % if this fails, you forgot to 
+                                     % add [videoIODir] to your matlab path
+
+  testAll % This will take a long time (perhaps up to a few hours) to 
+          % complete, but the most basic and most critical tests are run 
+          % first, so you should get early feedback if there's a problem.
+  
+Usage
+=====
+See README.txt for a simple usage example.  For user-level documentation, 
+type any or all of the following at the Matlab prompt:
+
+  help buildVideoIO
+  help videoReader
+  help videoWriter
+  help videoread
+  help tests/addFrameDemo
+  help tests/videoWriterDemo
+

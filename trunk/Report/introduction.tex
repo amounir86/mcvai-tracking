@@ -1,0 +1,28 @@
+\section{Introduction}
+
+\begin{itemize}
+\item Simple Tracker \\ 
+
+\xymatrix{*+<0.5cm>[F-,]{Segmentation} \ar[r] & *+<0.5cm>[F-,]{Detection}  \ar[r] &
+*+<0.5cm>[F-,]{Representation}  \ar[r] & *+<0.5cm>[F-,]{Tracking} 
+}
+
+\item Our Tracker\\ 
+
+\xymatrix{
+*+<0.3cm>[F]{Segmentation} \ar[r] \ar[d] & *+<0.3cm>[F]{Detection} \ar[r] \ar[d] &
+*+<0.3cm>[F]{Representation}  \ar[r] \ar[d] & *+<0.3cm>[F]{Tracking} \\
+*+<0.3cm>[F]{Grey-World} \ar[d] & *+<0.3cm>[F]{Face Detection} \ar[d] & *+<0.3cm>[F]{Velocity \& Histograms} \ar[d]\\
+*+<0.3cm>[F]{Eigenbackground}   & *+<0.3cm>[F]{Face recognition}      & *+<0.3cm>[F]{Multiple targets}
+}
+
+%\xymatrix{
+%S \ar[r] \ar[d] & R \ar[r] \ar[d] & R2  \ar[r] & T 
+%\\G \ar[d] & F \\E
+%}
+
+\end{itemize}
+
+In this project our main focus is to build a single and multiple target tracker. We extend this approach to build a useful real-life application to that tracker which is a face recognizer and tracker.
+
+The first step of our tracking process is \textbf{Segmentation}, which is the responsible of separate the foreground from the background . We use the foreground of the scene to detect the faces and correspond them to the ones which we are interested in. Afterwards, we calculate the velocity of the person having his/her face and we keep tracking until the person leaves the scene or our tracker fails.

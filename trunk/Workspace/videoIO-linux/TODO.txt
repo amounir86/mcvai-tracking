@@ -1,0 +1,210 @@
+This file contains suggestions for things that may be added in future 
+versions of the library.  If any of these items are especially interesting
+to you, feel free to contact the author (dalleyg@ieee.org).
+
+A handy command to search for TODO items in the source code is:
+  grep -r TODO * | grep --invert-match '\.svn' | grep --invert-match tracker | grep --invert-match 'TODO\.txt' | grep --invert-match '~:'
+
+-- review all documentation
+ 
+-- consider de-capitalizing all public function names to be more consistent
+   with matlab conventions
+
+## docs: must have R14sp2 or later to use the binary packages.  You can try
+   renaming the .mexw32 to .mex if you want to try skipping the building.
+
+supported versions:
+ ## So far, I've tried to maintain support for Matlab 6.5 and newer.  6.5
+    has always been troublesome in terms of exception handling and it lacks
+    many very useful features found in later versions.  For example, R14sp3
+    adds 'last' to the FIND function, 2006a is much friendlier with current
+    Debian stable gcc versions, and 2007a adds the ASSERT keyword.  
+    
+    Maintaining backward compatibility is time consuming.  At the lab I am
+    using, we have recently upgraded all of our Debian machines to the
+    Etch release (the Debian people no longer support Sarge).  Versions of 
+    Matlab older than 2006a do not work fully under Etch, so it is now 
+    harder to test for compatibility.
+    
+    For those who have requested help, the oldest version I believe that is 
+    being actively used by videoIO users is R2007a.  
+    
+    I am strongly considering dropping support for 6.5, all R14 versions, 
+    and possibly R2006a.  
+    
+    R2007b doesn't offer significant new features that affect videoIO.  
+    Mostly, it allows 64-bit array indexing and the MMREADER object.  
+    Excluding 32-bit indexing would not make videoIO any simpler and 
+    videoIO is still much more powerful than MMREADER.
+    
+    R2008a has some significant language improvements including a new object 
+    model that would be very interesting for videoIO.  Unfortunately, it is 
+    not widely used yet.  
+    
+    Latest Features for Matlab:
+      http://www.mathworks.com/products/matlab/whatsnew.html
+
+    UPDATE: Gordon Judd is an R14 user.
+
+AviSynth support
+ -- AviSynth doesn't (always?) provide the stream length.  Consider 
+    allowing DirectShowIVideo to operate when nFrames is unknown.  Either
+    checks and/or doc warnings should be put in place that if there is
+    no nFrames check in DirectShowIVideo::seek, then 'frameTimeoutMS' 
+    should be a finite value (to avoid locking up the system).
+
+get/set methods:
+  -- consider overloading the . operator to allow C++-style accessors.
+  
+Static methods
+  -- VideoIO::IVideo: Consider having a getcodecs method on 
+     IVideoManager too (and allowing a 'codecs' static method).  
+
+distribution:
+  -- Consider running a configure script.  The unified makefile is nice,
+     but it's slow now that it searches for ffmpeg multiple times.  
+     An alternative might be to cache the ffmpeg search results.  Also,
+     in the current approach testAll won't work right with mixed-mode
+     systems because it calls buildVideoIO directly without the required
+     special parameters.
+
+tests:
+  -- When tests (especially doPreciseSeekTests) fail, popup a figure 
+     showing the problem and/or take a screenshot that people can email
+     and/or examine for debugging purposes.
+
+pulldown, ivtc:
+  -- Make a generic pulldown removal filter that works on all platforms, fixes
+     the framerate, fixes the number of frames, and so on.  This is nontrivial.
+     The best approach might be to port Donald Graft's DeComb and FDecimate
+     filters.
+  
+directshow filters:
+  -- Find a good way to allow user configuration of manually added directshow 
+     filters.  There are 3 basic options: (1) fix the remote filtergraph
+     features on Vista so that Microsoft GraphEdit / Monogram GraphStudio may 
+     be used, (2) use a technique like those two applications to pop up a
+     property sheet dialog, or (3) write a scripting engine to simulate
+     interacting with a hidden property sheet as described here:
+       http://groups.google.com/group/microsoft.public.win32.programmer.directx.video/browse_thread/thread/2390b9b3538561ce
+     Option 1 is a little tricky.  It involves using a 3rd party application
+     and it's easy to mess up a filtergraph that's running if you can connect.
+     Option 2 is probably a good one.  A semi-experienced Windows programmer
+     could probably get it working in short order.  Option 3 requires a bit
+     more Windows/MFC knowledge to implement cleanly.
+     
+  -- Rewrite DirectShowOVideo to use DirectShow instead of the AVI* 
+     functions.  In particular, it may be useful to adapt the PushSource
+     example from the Windows SDK, using a synchronization mechanism
+     similar to DirectShowIVideo's.  Purportedly, the DirectShow API can
+     output OpenDML (AVI 2.0) files that can grow larger than 2GB.  This
+     would be the primary reason for switching to this more complex 
+     solution.
+
+options struct for constructors:
+  Allow codec params to be supplied as a struct in videoReader, 
+  videoWriter constructors.  Counter-argument: this might be a bad idea 
+  because it might be tempting to use @videoWriter/getinfo's output and 
+  forget to change the filename, thus overwriting previous video files.
+
+@videoWriter/getinfo:
+  Add frameNum field to the return value.
+
+codec metadata:
+  Enhance videoWriter([], 'codecs') to return friendly names and/or other 
+  useful information (at least on Windows).  To do so, have 
+  OVideoManager::getcodecs return a 
+    map<CodecName, map<DetailFieldName,DetailFieldValue> > 
+  where CodecName, DetailFieldName, and DetailFieldValue are all strings.  
+  To use the return result on Windows, do something like:
+    getcodecs()["xvid"]["FriendlyName"] // returns "XviD MPEG-4 Codec" on Win32
+
+get defaults:  
+  Implement a way of getting the default values for videoWriter constructor
+  parameters.  Perhaps the solution is to do the bulk of the parsing in 
+  Matlab and pass a fixed options structure to C++?  
+
+colorspaces:
+  Allow different colorspaces, e.g. YCC and not just RGB.  This is useful 
+  if, for example, the user wants to do image processing in the YCC domain 
+  instead of RGB.
+  
+seeking precision:
+  Allow imprecise seeks with ffmpeg, if there is API support.
+  
+buffering:
+  Consider doing decoder prefetching by using a background thread to keep 
+  a buffer of the next n decoded frames for videoReader and keeping a 
+  buffer for encoding frames with videoWriter.  This should allow much 
+  better throughput on multicore systems.  The buffer size should be a 
+  user-settable parameter to the constructor at very least.  The user 
+  should also be allowed to revert to the current synchronous mode.  
+  
+SampleGrabber:
+  On Windows, it might be worth taking a close look at 
+     [DX9SDK]\Samples\C++\DirectShow\Filters\Grabber\grabber_text.txt
+  for a different, more powerful method of sample grabbing.
+  
+DirectShowPopen2:
+  Provide a DirectShow plugin where the mex file runs in 64-bit mode but the
+  server process runs in 32-bit mode.  This would allow 64-bit Matlab to take
+  advantage of 32-bit codecs.
+
+audio:
+  Add support for audio.  This will probably require a lot of extra work.
+  
+avifile/xine support:
+  Recreate avifile plugins for 32-bit Linux.  Note that support for avifile 
+  was removed because:
+    1) the avifile library is hard to build (it requires modifying avifile's 
+       source code since it's hard for avifile to stay in sync with ffmpeg's
+       rather frequent API changes)
+    2) by now (8 Mar 2007), there are few things that avifile does that 
+       ffmpeg can't do natively.
+    3) avifile likes to write to stdout, and this can't be fixed without 
+       modifying the source code (the library initializes itself and prints 
+       logger messages before the user has a chance of disabling the 
+       logger).  We could return to the old solution of having 
+       readMessageHeader ignore any text before a valid header, but doing 
+       so makes it more complicated.
+  Unless there's a really good reason to resurrect the avifile plugin, it 
+  will likely not happen.  If ffmpeg proves to not be powerful enough, it
+  might be better to make a xine plugin.  The xine media player's backend 
+  uses a library that looks pretty clean.  MPlayer doesn't really have a 
+  clean backend, so wrapping it up would be extremely challenging and 
+  brittle to its frequent code changes.  xine does seem to have a nice library
+  interface, so it might be a better option.
+  
+imread/load plugins:
+  -- Consider autoselecting imread/load plugins by default 
+     when wildcards/sprintf-strings are found in the url.  
+  -- Consider adding support for reading streamed files.  Right now, the
+     load and imread plugins obtain an immutable file list at construction 
+     time.  Some users may find it handy to be able to read files that were
+     created after construction time.  This feature may be tricky to support
+     for the wildcard version.
+  -- If users need it, use a more efficient data structure for holding 
+     filenames when the first frame number is a very large number (right now
+     we use a linear cell array starting at index 0).
+
+imwrite/save plugins:
+  -- consider making imwrite/save plugins for writing videos as duals of the
+     imread/load reading plugins.
+
+videoIoSysInfo:
+  -- It would be cleaner to move the 3rd-party library status checks of 
+     videoIoSysInfo into the makefiles.  This would avoid dependencies between 
+     the two and we would be more likely to be able to catch tweaks users might
+     make to the makefiles.
+
+  -- Call videoReader([],...,'codecs') on all plugins and integrate the results.
+    
+classdef implementation:
+  Matlab 2008a has introduced a much richer object-oriented framework.  It 
+  would be interesting to rework videoIO as handle classes.  DELETE is cleaner
+  than what we can do with CLOSE.  I haven't read enough of the docs yet to 
+  have a better idea about how well classes interact with MEX functions.  My
+  guess is that they basically don't, like classes in earlier Matlab versions.
+
+  An obvious downside is that earlier versions of Matlab would not be supported 
+  any more.
