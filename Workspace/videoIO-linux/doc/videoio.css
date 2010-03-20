@@ -1,0 +1,16 @@
+body       { font-family: cambria,roman,times,serif }
+h1         { font-family: candara,"arial narrow",arial,helvetica,sans-serif }
+h2         { font-family: candara,"arial narrow",arial,helvetica,sans-serif; border-top: solid medium black; padding-top:0.25em; margin-top:1.5em }
+h3         { font-family: candara,"arial narrow",arial,helvetica,sans-serif; padding-top:0.75em; padding-bottom:0px; margin-bottom:0px }
+tt         { background-color:#eeEEff; font-family: consolas,"lucida console","courier new",monospace; font-size:small }
+pre        { background-color:#eeEEff; font-family: consolas,"lucida console","courier new",monospace; font-size:small }
+div.quick  { font-style:italic; border: solid thin black; background-color:#9999ff; margin:1em; padding:0.5em }
+div.expl   { background-color:#ccCCff; border: solid thin black; margin:1em; padding:0.5em }
+td.expl    { background-color:#ccCCff; padding:0.5em; }
+td         { padding:0px; vertical-align:top }
+blockquote { margin-top:0px; margin-bottom:0px }
+pre        { margin-top:0px; margin-bottom:0px }
+pre.comment{ color:green }
+ul.left    { padding-left:1.25em; margin-left:1.25em; }
+li         { padding-bottom:0.5em; padding-top:0.5em }
+li.tight   { padding-bottom:0px; padding-top:0px; padding-right:1em }

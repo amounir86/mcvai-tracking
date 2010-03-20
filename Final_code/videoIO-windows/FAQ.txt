@@ -1,0 +1,398 @@
+##############################################################################
+#### Frequently Asked Questions
+##############################################################################
+
+------------------------------------------------------------------------------
+Q: Why should I use videoIO?
+
+A: See README.txt's "Motivation" section.
+
+------------------------------------------------------------------------------
+Q: How do I use videoIO?
+
+A: See INSTALL.dshow.html (Windows) or INSTALL.ffmpeg.txt (Linux) for 
+   installation instructions.  Then look at the documentation in
+   the constructors @videoReader/videoReader.m and @videoWriter/videoWriter.m
+   by typing
+     help videoReader
+     help videoWriter
+   in Matlab.  A simple videoReader example is given in README.txt and 
+   tests/videoWriterDemo.m is a good example of writing videos:
+     edit(fullfile(videoIODir, 'tests', 'videoWriterDemo.m'));
+
+------------------------------------------------------------------------------
+Q: videoIO, videoReader, and videoWriter: what's what?
+
+A: Originally, this library was just called videoReader because it was only
+   used to stream videos into Matlab using mex function plugins to access
+   3rd party libraries like ffmpeg and DirectShow.  Later we found it 
+   natural to  extend the capabilities to include writing videos as well.
+   videoIO is the name of the library that allows reading videos with 
+   videoReader objects and their plugins and writing videos with videoWriter
+   objects and their plugins.
+
+------------------------------------------------------------------------------
+Q: How do I install videoIO?
+
+A: See INSTALL.ffmpeg.txt on GNU/Linux and similar operating systems and
+   INSTALL.dshow.html on Microsoft Windows.
+
+------------------------------------------------------------------------------
+Q: Why are precompiled binary mex files only supplied for Windows?
+
+A: With respect to core library interfaces, Windows is a very stable and 
+   consistent operating system and thus the provided binary mex files are
+   likely to work on any Windows XP or Vista system.  
+    
+   There are vast differences in versions of ffmpeg, gcc, and base system
+   libraries between different Linux distributions and different releases of
+   a given distribution.  To avoid maintaining a large set of binary 
+   packages, we instead provide the source and step-by-step installation
+   instructions (see INSTALL.ffmpeg.txt).
+
+------------------------------------------------------------------------------
+Q: Why should I install videoIO on a local hard drive and not on a 
+   networked location like my home directory when using Linux?
+   
+A: It is very easy to have different versions of ffmpeg running on different 
+   machines, especially if you have compiled from sources and/or if you have
+   some 32-bit and some 64-bit machines.  There are incompatibilities between 
+   different versions of ffmpeg that can be hard to track down if the binary 
+   version of a videoIO plugin was built against a one version of ffmpeg's 
+   libraries and loaded with a different one.  These include changes in
+   data structures that are not detected at runtime and different sets of
+   supported codecs.  Thus we strong recommend *not* placing videoIO in a 
+   networked location such as your home directory.  See INSTALL.ffmpeg.txt for
+   some suggested locations.
+   
+------------------------------------------------------------------------------
+Q: What is the difference between the ffmpegPopen2 and the ffmpegDirect 
+   plugins on Linux?
+
+A: For a comparison of the two plugin sets, type 
+     help videoReader
+   and/or 
+     help videoWriter
+   in Matlab.
+
+------------------------------------------------------------------------------
+Q: When I build videoIO on Linux, I see warning messages of the form
+      Warning: You are using gcc version "3.3.5".  The earliest gcc version 
+      supported with mex is "4.0.0".  The latest version tested for use with 
+      mex is "4.2.0".  To download a different version of gcc, visit 
+      http://gcc.gnu.org 
+   
+A: If your version of gcc is incompatible with the one used to build Matlab,
+   very strange errors can occur when running mex files.  We have created the
+   ffmpegPopen2 plugin specifically to address this issue.  Use it instead of
+   the ffmpegDirect to be safe.
+
+------------------------------------------------------------------------------
+Q: The linker can't find sws_freeContext, sws_getCachedContext, or sws_scale
+   on Linux.  What's wrong?
+
+A: Rebuild ffmpeg from the sources using the --enable-swscaler flag when
+   running ./configure.  See INSTALL.ffmpeg.txt.
+
+   These are swscaler functions used to do image scaling and color conversion.
+   Starting with version 51.11.0 of libavcodec, ffmpeg has deprecated 
+   img_convert (a more user-friendly, but less powerful and less efficient 
+   colorspace converter) in favor of using swscaler.  Since the public header 
+   files give no mechanism for determining whether ffmpeg was compiled with 
+   swscaler vs. img_convert support, we assume swscaler is used when 
+   libavcodec's version is at least 51.11.0 and that img_convert is to be used
+   for earlier versions.  
+   
+------------------------------------------------------------------------------
+Q: I had some error with one videoReader or videoWriter object and now all
+   of the rest of my opened videos are having troubles and/or I'm having 
+   troubles opening new ones.  What do I do?
+
+A: Best case:   try opening the video file again.
+   Medium case: type "clearVideoIO" -- this will unload the plugins
+   Worst case:  type "clear all" -- this will unload the plugins, close any 
+                  opened/locked files, etc.
+   
+   Our plugins attempt to detect when a codecs may have done a bad thing 
+   like produce rouge threads, segmentation faults, or other crashes.  If we
+   think an unrecoverable error has occurred, the library may automatically 
+   close all open video files.  Typically, we are able to detect a problem 
+   and cleanly unload the affected plugin.  In such cases, videoWriter 
+   objects are properly destructed so that valid video files are created.  
+   Doing the unloading unfortunately invalidates all open video handles 
+   within the same plugin.  Our library tries hard to avoid these situations 
+   and avoid unrecoverable errors as much as possible, but they still occur 
+   under some situations.
+
+------------------------------------------------------------------------------
+Q: The installation instructions tell me to modify my environment variables.
+   What are they and how do I do this on Windows?
+   
+A: "Environment variables are a set of dynamic values that can affect the way 
+   running processes will behave on a computer 
+   (http://en.wikipedia.org/wiki/Environment_variable)."
+
+   While setting up compiler options, we need to add or modify a few 
+   environment variables.  This does things like telling Windows where to 
+   find programs that will be executed on the command line and where DLLs 
+   are located.
+
+   In Windows Vista, setting environment variables is very similar to the way 
+   it's done in Windows XP:
+      http://support.microsoft.com/default.aspx?scid=kb;en-us;310519
+   Here we describe the general procedure for Windows Vista.
+
+   For the sake of concreteness, we'll run through an example.  Suppose you 
+   have installed Visual Studio on a 64-bit operating system to its default 
+   location,
+      "C:\Program Files (x86)\Microsoft Visual Studio 8"
+   We'll want to have command-line access to the compiler utilities, so we 
+   want to add the "VC\bin" subdirectory to the system path.
+
+      1) Click on the start menu then right-click on "Computer" and select 
+         "Properties"
+
+      2) Click on "Advanced System Settings" in the Tasks list on the left
+
+      3) Go to the "Advanced" tab and click the "Environment Variables" button
+
+      4) Edit the "Path" system variable
+
+      5) Add ";C:\Program Files (x86)\Microsoft Visual Studio 8\VC\bin" 
+         (without quotes) to the end of the existing string.  Semicolons (;) 
+         delimit different paths, so if you add a new path to the beginning of
+         the string, you'll need to put the semicolon at the end of this added
+         string instead of at the beginning.
+
+      6) Close all dialogs and windows you've just opened (accepting changes, 
+         not canceling them).
+
+   Sometimes we will use command-line syntax to indicate changes to the 
+   system environment variables, e.g.
+    
+     set PATH="%PATH%;C:\Program Files (x86)\Microsoft Visual Studio 8\VC\bin"
+      
+   should be interpreted as a request to do all of the steps listed above.
+
+   Important note: spaces matter in most environment variables.  For example,
+   in the PATH above, it is important not to put any whitespace before or 
+   after the semicolon.
+
+------------------------------------------------------------------------------
+Q: When setting up environment variables on Windows, can I use the user 
+   environment variables instead of the system variables?
+   
+A: Yes you may.  Here's why we suggest using the system variables...
+   We assume that most Windows boxes are either single-user boxes (in which 
+   case it doesn't matter at all) or all users will want to use and build the 
+   library.  In our experience, it's much easier to set the system variables 
+   once than it would be to set up user variables for every single user.
+
+------------------------------------------------------------------------------
+Q: How can I tell if I have 32-bit or 64-bit Windows?
+
+A: The easiest (to explain) way is to look and see if you have a folder called 
+       C:\Program Files (x86)
+   If this directory exists, then you are using 64-bit Windows.  This 
+   directory is where 64-bit Windows puts 32-bit programs.
+
+------------------------------------------------------------------------------
+Q: Long seeks are not frame-accurate.  For example, on Windows
+   
+    vr = videoReader('numbers.divx611.avi');
+    seek(vr,200); I = getframe(vr); 
+    figure(1); image(I); % Shows 199 - inaccurate
+    vr = close(vr);
+
+    vr = videoReader('numbers.divx611.avi');
+    seek(vr,100); 
+    seek(vr,200); I = getframe(vr); 
+    figure(2); image(I); % Shows 200 - accurate
+    vr = close(vr);
+
+   What is happening here?
+
+A: When making the specification for decoders, Microsoft chose to not require
+   frame accuracy.  For variable bitrate codecs, this means that some decoders
+   will choose to speed up their seeks by estimating the file location of the
+   desired frame and then they just read the first frame they find near the
+   estimated location.  For long videos, these imprecise seeks can be far 
+   faster than precise ones.
+
+   Currently, you can guarantee frame-accurate seeks by using the next method
+   instead of the seek method or by adjusting the 'preciseFrames' constructor
+   parameter when creating a videoReader object.  Type "help videoReader"
+   at the Matlab prompt for details on setting 'preciseFrames'.
+
+------------------------------------------------------------------------------
+Q: I am using the DivX decoder on Windows and all of the frames are off by one
+   position.  
+   
+   For example, if I open a new file and call next() twice, I still get the 
+   first frame when I call getframe().
+   
+   What is happening?
+
+A: By default, the DivX decoder chooses to delay all output by a single frame.
+   To modify this behavior, go to the Start menu and pick the DivX folder and 
+   the "DivX Decoder" directory under that.  Launch the "Decoder Configuration
+   Utility."  In the Decoder tab, uncheck "Reduce CPU spikes using one frame
+   delay" and "Use advanced hardware overlay."  Both options must be unchecked
+   to remove the problem.
+   
+   An alternative solution is to use ffdshow-tryouts to decode DivX files on 
+   Windows.  As of Nov. 2007, these decoders can be found at
+   
+     http://ffdshow-tryout.sourceforge.net/
+   
+   These decoders can decode a wide variety of compression formats and are
+   quite configurable.  
+
+------------------------------------------------------------------------------
+Q: What combination of 32-bit and 64-bit software can be used with the 
+   videoIO toolbox?
+
+A: On 32-bit Windows, only 32-bit Matlab and 32-bit DirectShow with 32-bit 
+   codecs are supported.
+
+   On 64-bit Windows, one may use 32-bit Matlab with 32-bit DirectShow and 
+   32-bit codecs.  Alternatively, one may use 64-bit Matlab with 64-bit
+   DirectShow and 64-bit codecs.
+
+   On 32-bit Linux, only 32-bit Matlab and 32-bit ffmpeg are supported.
+
+   On 64-bit Linux, nearly any combination of 32-bit and 64-bit Matlab and
+   ffmpeg may be used with each type of plugin.  See INSTALL.ffmpeg.txt and
+   makefile for details.
+
+------------------------------------------------------------------------------
+Q: How do I decode AVCHD video?
+
+A: Quick answer: 
+   -------------
+   Try ffmpeg on Linux and ffdshow on Windows.  If those fail or give 
+   unexpected results, read the rest of the answer.
+   
+   Background:
+   -----------
+   AVCHD is more-or-less another name for H.264, MPEG4 Part 10, or MPEG4 AVC.
+   It a complex codec that tends to produce high-quality results with 
+   extremely high compression ratios.  As of March 2008, decoding these videos
+   can unfortunately be tricky in many cases, depending on how the encoder was
+   configured, especially when using camcorder-encoded AVCHD content.
+   
+   Linux:
+   ------
+   On Linux, ffmpeg has an H.264 decoder that, in our experience, has worked 
+   flawlessly with H.264 videos encoded by common software encoders such as
+   x264, ffmpeg, and mencoder.  Unfortunately, the encoder embedded in 
+   camcorders such as the Canon HG10 use some obscure H.264 features that 
+   confuse ffmpeg and result in occasional incorrectly-decoded frames (Canon 
+   uses PAFF encoding with top field B-frames using temporal prediction and 
+   bottom fields using spatial prediction).  As of March 2008, the ffmpeg 
+   team has explicitly stated that they have no immediate plans to  offer 
+   full PAFF support (unless someone is willing to fund it).  At the present 
+   time, we do not know of any readily-available 100%-reliable solution for 
+   decoding these PAFF-using files on Linux.  
+   
+   Try playing your videos and see if they work.  For PAFF videos, we tend 
+   to notice problems most frequently in high-contrast areas undergoing 
+   sudden fast motion.  If you notice decoder errors your choices are (a)
+   wait for ffmpeg to add full PAFF support, (b) help ffmpeg add it via
+   manpower or funding, or (c) look at some of the Windows solutions.
+   
+   Note that other Linux-based solutions such as mencoder, xine, and so forth
+   are likely to all exhibit the same problems as ffmpeg since they use 
+   ffmpeg's libavcodec library to perform the decoding.
+   
+   32-bit Matlab on Windows:
+   -------------------------
+   ffdshow is a Windows DirectShow wrapper for ffmpeg, DScaler, and AviSynth.  
+   It suffers from the same lack of full PAFF support described above in the
+   Linux section of this answer.  We recommend testing your videos before 
+   either relying on ffdshow spending a lot of time trying other codecs.  
+   
+   If ffdshow does not work for your videos, there are many commercial AVCHD 
+   codecs available (ArcSoft, CoreAVC, CyberLink, DiVX, InterVideo, etc.).  
+   Unfortunately, as of March 2008, none of these commercial codecs work 100% 
+   correctly on all AVCHD videos.  Try each of them on your videos if ffdshow 
+   is not working for you.  
+   
+   We have extensively tested decoders using 1440x1080, 24pf high-definition 
+   video clips recorded on a Canon HG10 camcorder.  Note that "24pf" means 
+   that the content was (a) captured at 1920x0180 at 24 progressive frames 
+   per second, (b) scaled down to 1440x1080, (c) broken up into fields, 
+   (d) processed with 2-3 pulldown, and (e) encoded.  This means the video
+   is stored as if it were 60 fields-per-second, interlaced.  Here is what
+   the aforementioned decoders do with the content:
+     ArcSoft:    discards half the fields
+     CoreAVC:    decodes as 30fps frames with the interlacing on 2 out of 
+                   every 5 frames (due to the 2-3 pulldown done in the 
+                   camera).  Deinterlacing can be enabled or disabled.  
+                   Seeking is broken.
+     CyberLink:  decodes the same way as CoreAVC, but deinterlacing cannot
+                   be disabled, and frames are rescaled to 1440x810 and 
+                   letterboxed.  Seeking works.
+     DiVX:       crashes
+     ffdshow:    exhibits some frame corruption in some clips
+     InterVideo: decodes the same way as CoreAVC, but deinterlacing cannot 
+                   be disabled.  Seeking works.
+   If you don't mind deinterlacing (e.g. you will not be doing pulldown 
+   removal), the InterVideo codec works great.  It's available with Ulead
+   Video Studio 11.5+ and/or with the HG10 application disk.  If you would
+   like to do pulldown removal, we currently (March 2008) recommend using
+   the CoreAVC codec and using 'preciseFrames',-1 so that no seeking 
+   actually takes place.
+   
+   Another option is to transcode the video.  One may use a lossless codec 
+   such as Lagarith or CineForm NeoHDV or any other codec that suits you.
+   Note that to do this, the transcoding application will still need to 
+   properly decode the video and if pulldown removal is desired, the 
+   transcoder should support it. 
+
+   64-bit Matlab on Windows:
+   -------------------------
+   Try ffdshow.  It is the only 64-bit Windows H.264 decoder, to the best of
+   our knowledge.  
+
+------------------------------------------------------------------------------
+Q: I have a 24fps "progressive" high definition video recorded on a Canon 
+   HG10, HR10, HF10, HF100, or similar camcorder but when I read the video, 
+   it looks interlaced at 30fps.  Why is this and how do I obtain the 
+   progressive frames?
+
+A: See doc/pulldownRemoval.html for step-by-step instructions.  This can
+   only be done easily and reliably on 32-bit Matlab on Windows as of 
+   March 2008.
+
+------------------------------------------------------------------------------
+Q: When I run testall.m, I get the following error:
+     ??? Undefined function or method 'videoReader' for input arguments of 
+     type 'char'.
+   What am I doing wrong?
+
+A: The videoIO directory has not been added to Matlab's search path.  To 
+   resolve this issue, follow the instructions in the "Matlab Path" section 
+   of INSTALL.ffmpeg.txt (on GNU/Linux) or INSTALL.dshow.html (on Windows).
+
+------------------------------------------------------------------------------
+Q: When trying to run buildVideoIO on Windows, I am getting an error of the 
+   form:
+     C:\Program Files\Microsoft SDKs\Windows\v6.0\Include\qedit.h(498) : 
+       fatal error C1083: Cannot open include file: 'dxtrans.h': 
+       No such file or directory 
+   What is happening and how do I fix it?
+
+A: Edit your qedit.h and comment out the line
+     #include "dxtrans.h"
+
+   Why:
+   qedit.h is in the Windows (or Platform) SDK and it has some dependencies
+   on DirectX, including this dxtrans.h.  As of November 2007, Microsoft
+   no longer ships this file with the DirectX SDK, but it has not updated
+   the Windows SDK to either remove this dependency or transfer the relevant
+   portions back to the Windows SDK itself.  videoIO doesn't need these
+   parts of qedit.h, so we just remove the dependency using a workaround 
+   that Microsoft suggests using.
+     http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=2617687&SiteID=1  
+

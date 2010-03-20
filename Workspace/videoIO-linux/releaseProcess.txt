@@ -1,0 +1,49 @@
+This file was created for the convenience of the videoIO author to record 
+the steps for creating a new release.  Most users have no need of this 
+file.
+
+1) Run testAll
+   *) On 32-bit Windows
+   *) On 64-bit Windows
+   *) On 32-bit Linux
+   *) On 64-bit Linux
+   If there are any problems, fix them before proceeding
+
+2) Run "mlintrpt" and fix any warnings
+   cd(videoIODir);
+   mlintrpt;
+   mlintrpt('@videoReader',        'dir');
+   mlintrpt('@videoWriter',        'dir');
+   mlintrpt('tests',               'dir');
+   mlintrpt('private',             'dir');
+   mlintrpt('contrib/libmpeg3',    'dir');
+   mlintrpt('contrib/videoPlayer', 'dir');
+   
+3) Build packages
+   a) Build win32 binaries
+   b) Build win64 binaries
+   c) Run buildVideoIoPackages.m on Windows
+
+2) ChangeLog.txt
+   a) Make sure all important changes are documented.
+   b) Write a 1-2 sentence summary.  It'll be used for sourceforge and 
+      Mathworks
+   c) Set the revision number
+   d) commit
+
+4) Create tag
+   sample:
+     svn copy https://svn/videoIO/trunk \
+           https://svn/videoIO/tags/release-1.0 \
+      -m "Tagging the 1.0 release of the 'videoIO' project."
+
+5) SourceForge
+   a) ./mirrorToSourceforge.pl
+   b) Create and upload packages from step 3.
+      https://sourceforge.net/project/admin/editpackages.php?group_id=174701
+   c) Create a new news item using the summary from step 2b.
+
+6) MathWorks
+   a) Upload source package 
+      http://www.mathworks.com/matlabcentral/fileexchange/loadFile.do?objectId=15224&objectType=FILE
+   b) User summary from step 2b.
