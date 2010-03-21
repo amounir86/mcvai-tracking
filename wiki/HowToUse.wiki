@@ -32,19 +32,19 @@ This is the face tracker, the reason we are all here. To make it work we have to
 
 == Windows users ==
 
-* Install the free DivX codec pack. This is needed for video encoding and decoding in Matlab.
-* Type: setup_framework(); at the Matlab prompt.
+  * Install the free DivX codec pack. This is needed for video encoding and decoding in Matlab.
+  * Type: setup_framework(); at the Matlab prompt.
 
 == Linux users ==
 
-* In the command prompt execute the following lines:
+  * In the command prompt execute the following lines:
 
 {{{
 sudo apt-get install ffmpeg g++-4.1
 sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libswscale-dev
 }}}
 
-* Type: setup_framework(); at the Matlab prompt.
+  * Type: setup_framework(); at the Matlab prompt.
 
 After everything is set lets execute the program on a video. Sample videos are provided in the Videos directory. You can find videos for the people whose faces were given as training data in the Faces directory. This will make it easy to understand what's going on and easily modify it.
 
@@ -56,10 +56,10 @@ eagles_tracker('../Videos/MOV03678.AVI', 0.05, 50, 3, {'ahmed', 'lluis'});
 
 Parameters description:
 
-# Video used for testing
-# gamma
-# tau
-# radius
-# Array of classes to be recognized and tracked
+  # Video used for testing
+  # gamma
+  # tau
+  # radius
+  # Array of classes to be recognized and tracked
 
 That's all. Now the program should be ready to run. Play with it and have fun.
