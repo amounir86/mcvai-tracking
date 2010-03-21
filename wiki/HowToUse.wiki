@@ -62,4 +62,4 @@ eagles_tracker('../Videos/MOV03678.AVI', 0.05, 50, 3, {'ahmed', 'lluis'});
   # radius
   # Array of classes to be recognized and tracked
 
-That's all. Now the program should be ready to run. Play with it and have fun.
+That's all. Now the program should be ready to run. Play with it and have fun. For further inquiries please post your comments and we'll be glad to make the required modifications as soon as possible.
