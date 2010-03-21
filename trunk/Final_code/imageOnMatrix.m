@@ -1,7 +1,7 @@
 function [imgMatrix, labeledArray] = imageOnMatrix()
 %IMAGEONMATRIX Summary of this function goes here
 %   Detailed explanation goes here
-imgnames = file_list('Faces','bmp');
+imgnames = file_list('../Faces','bmp');
 imgvector = [];
 labeledArray = cell(length(imgnames),1);
 w = 25;
