@@ -48,13 +48,13 @@ sudo apt-get install libavcodec-dev libavformat-dev libavdevice-dev libswscale-d
 
 After everything is set lets execute the program on a video. Sample videos are provided in the Videos directory. You can find videos for the people whose faces were given as training data in the Faces directory. This will make it easy to understand what's going on and easily modify it.
 
-Execute this code:
+=== Execute this code ===
 
 {{{
 eagles_tracker('../Videos/MOV03678.AVI', 0.05, 50, 3, {'ahmed', 'lluis'});
 }}}
 
-Parameters description:
+=== Parameters description ===
 
   # Video used for testing
   # gamma
